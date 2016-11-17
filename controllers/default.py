@@ -35,6 +35,7 @@ def user():
         @auth.requires_permission('read','table name',record_id)
     to decorate functions that need access control
     also notice there is http://..../[app]/appadmin/manage/auth to allow administrator to manage users
+    Testing
     """
     return dict(form=auth())
 
