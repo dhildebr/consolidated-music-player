@@ -3,9 +3,10 @@ databases/*
 errors/*
 sessions/*
 uploads/*
-*.pyc
-*~
+
 .idea/*
 .sass-cache
 .sass-cache/*
 
+*.pyc
+*~
