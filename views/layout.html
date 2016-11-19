@@ -37,6 +37,9 @@
     <link rel="icon" type="image/png" href="{{=URL('static', 'images/favicon/favicon-16x16.png')}}" sizes="16x16">
     <link rel="shortcut icon" href="{{=URL('static', 'images/favicon/favicon.ico')}}">
     
+    <!-- Include custom fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    
     <!-- All JavaScript at the bottom, except for Modernizr which enables
          HTML5 elements & feature detects -->
     <script src="{{=URL('static','js/modernizr-2.8.3.min.js')}}"></script>
@@ -98,36 +101,13 @@
     {{end}}
     
     <!-- Main ========================================= -->
-    <!-- Begin page content -->
-    <div class="container-fluid main-container">
-      {{if left_sidebar_enabled:}}
-        <div class="col-md-3 left-sidebar">
-            {{block left_sidebar}}
-            <h3>Left Sidebar</h3>
-            <p></p>
-            {{end}}
-        </div>
-      {{pass}}
-
-      <div class="{{=middle_column}}">
-        {{block center}}
-        {{include}}
-        {{end}}
-      </div>
-
-      {{if right_sidebar_enabled:}}
-        <div class="col-md-3">
-            {{block right_sidebar}}
-            <h3>Right Sidebar</h3>
-            <p></p>
-            {{end}}
-        </div>
-      {{pass}}
-
-    </div>
+    {{block center}}
+    {{include}}
+    {{end}}
     
     <!-- This is the default footer -->
-    {{block footer}}{{end}}
+    {{block footer}}
+    {{end}}
     
     <!-- The javascript =============================== -->
     <script src="{{=URL('static','js/bootstrap.min.js')}}"></script>

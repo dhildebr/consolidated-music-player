@@ -1,4 +1,39 @@
-/* line 1, ../sass/_main.scss */
-.colorful {
-  color: #bb8833;
+input.search-field
+{
+  border: 3px solid #000000;
+  border-radius: 5px;
+  color: #000000;
+  font: 1.25pc "Roboto", "sans-serif";
+  margin: 5px;
+  padding: 3px 7px;
+}
+
+input.soundcloud-search
+{
+  background: #FFF1E6;
+  border-color: #FF7700;
+}
+
+input.spotify-search
+{
+  background: #F7FFE6;
+  border-color: #84BD00;
+}
+
+div.centered
+{
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+div.main-content
+{
+  background: #eeeeee;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1600px;
+  min-width: 800px;
+  padding: 10px;
+  width: 80%;
 }
