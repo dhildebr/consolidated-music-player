@@ -9,6 +9,11 @@ var app = function()
   var self = {};
   Vue.config.silent = false;
   
+  self.getTracksFromSoundcloud = function(queryString)
+  {
+    
+  };
+  
   self.vue = new Vue({
     el: "#vue-div",
     delimiters: ['${', '}'],
