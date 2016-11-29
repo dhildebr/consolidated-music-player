@@ -1,14 +1,37 @@
 {{extend 'layout.html'}}
 
+{{block head}}
+<script src="{{=URL('static', 'js/vue.js')}}"></script>
+<script>
+    var tracks_url = "{{=URL('api', 'get_tracks')}}";
+    var del_track_url = "{{=URL('api', 'del_track', user_signature=True)}}";
+    var add_track_from_spotify_url = "{{=URL('api', 'add_track_from_spotify', user_signature=True)}}";
+</script>
+
+{{end}}
+
 <div class="main-content" id="vue-div">
 
-  <div class="centered">
-    <input class="search-field soundcloud-search" id="search-field-soundcloud" type="text" size="50"></input>
-    <input class="search-field spotify-search" id="search-field-spotify" type="text" size="50"></input>
-  </div>
-  
-  <div id="search-results">
-    
-  </div>
-  
+    <div id="vue-div">
+        <div id="soundcloud_div" class="centered">
+            <input class="search-field soundcloud-search" id="search-field-soundcloud" placeholder="SoundCloud" type="text" size="50"></input>
+            <button class="btn btn-primary">Search</button>
+        </div>
+
+        <div id="spotify_div" class="centered">
+            <input class="search-field spotify-search" id="search-field-soundcloud" placeholder="Spotify" type="text" size="50" v-model="form_song"></input>
+            <button class="btn btn-primary" v-on:click="add_track_from_spotify" id="add_track_from_spotify_submit">Search</button>
+        </div>
+    </div>
+    <div v-for="t in tracks">
+        <button>Add to library</button>
+        <p>Artist: ${t.artist}</p>
+        <p>Album: ${t.album}</p>
+        <p>Song: ${t.title}</p>
+        <p v-if="t.track_source=='spotify'"><iframe v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
+    </div>
 </div>
+
+
+
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>
