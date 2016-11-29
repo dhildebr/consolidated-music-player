@@ -3,12 +3,18 @@
 <div class="main-content" id="vue-div">
 
   <div class="centered">
-    <input class="search-field soundcloud-search" id="search-field-soundcloud" type="text" size="50"></input>
-    <input class="search-field spotify-search" id="search-field-spotify" type="text" size="50"></input>
+    <input class="search-field soundcloud-search" id="search-field-soundcloud" type="text" placeholder="Search Soundcloud" size="50"></input>
+    <input class="search-field spotify-search" id="search-field-spotify" type="text" placeholder="Search Spotify" size="50"></input>
   </div>
   
   <div id="search-results">
+    <div class="song-player" v-for="track in tracks">
     
+    </div>
   </div>
   
 </div>
+
+{{block page_end_js}}
+<script src="{{=URL('static', 'js/default.index.js')}}"></script>
+{{end}}

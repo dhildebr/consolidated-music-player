@@ -20,6 +20,16 @@ input.spotify-search
   border-color: #84BD00;
 }
 
+input.soundcloud-search:-moz-placeholder           { color: #995417; }
+input.soundcloud-search:-ms-input-placeholder      { color: #995417; }
+input.soundcloud-search::-moz-placeholder          { color: #995417; }
+input.soundcloud-search::-webkit-input-placeholder { color: #995417; }
+
+input.spotify-search:-moz-placeholder           { color: #5F8013; }
+input.spotify-search:-ms-input-placeholder      { color: #5F8013; }
+input.spotify-search::-moz-placeholder          { color: #5F8013; }
+input.spotify-search::-webkit-input-placeholder { color: #5F8013; }
+
 div.centered
 {
   margin: 0 auto;
@@ -29,7 +39,6 @@ div.centered
 
 div.main-content
 {
-  background: #eeeeee;
   height: 100%;
   margin: 0 auto;
   max-width: 1600px;

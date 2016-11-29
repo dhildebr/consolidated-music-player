@@ -53,6 +53,7 @@
     {{include 'web2py_ajax.html'}}
     
     <!-- Globally used Javascript libraries -->
+    <script src="{{=URL('static', 'js/vue.js')}}"></script>
     <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
     
     {{block head}}{{end}}
@@ -69,12 +70,6 @@
   </head>
   
   <body>
-    <!--[if lt IE 8]>
-    <p class="browserupgrade">
-      You are using an <strong>incredibly outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
-    </p>
-    <![endif]-->
-    
     <div class="w2p_flash alert alert-dismissable">{{=response.flash or ''}}</div>
     
     <!-- Navbar ======================================= -->
@@ -100,26 +95,29 @@
       </div>
     </nav>
     
-    <!-- Masthead ===================================== -->
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">
+      You are using an <strong>incredibly outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+    </p>
+    <![endif]-->
+    
     {{block header}}
     {{end}}
     
-    <!-- Main ========================================= -->
     {{block center}}
     {{include}}
     {{end}}
     
-    <!-- This is the default footer -->
     {{block footer}}
     {{end}}
     
-    <!-- The javascript =============================== -->
+    <!-- Page-end Javascript -->
     <script src="{{=URL('static','js/bootstrap.min.js')}}"></script>
     <script src="{{=URL('static','js/web2py-bootstrap3.js')}}"></script>
     
-    {{block page_js}}{{end page_js}}
+    {{block page_end_js}}{{end}}
     
-    <!-- Analytics ==================================== -->
+    <!-- Analytics -->
     {{if response.google_analytics_id:}}
     <script src="{{=URL('static','js/analytics.min.js')}}"></script>
     <script type="text/javascript">
@@ -129,7 +127,7 @@
     </script>
     {{pass}}
     
-    <!-- Share ============================y============ -->
+    <!-- Share -->
     <script src="{{=URL('static','js/share.js',vars=dict(static=URL('static','images')))}}"></script>
   </body>
   
