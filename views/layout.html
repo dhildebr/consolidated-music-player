@@ -12,6 +12,7 @@
          (even in intranet) & Chrome Frame
          Remove this if you use the .htaccess -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge{{=not request.is_local and ',chrome=1' or ''}}">
+    
     <!--  Mobile Viewport Fix
           j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag
           device-width: Occupy full width of the screen in its current orientation
@@ -21,15 +22,15 @@
     
     <!-- http://dev.w3.org/html5/markup/meta.name.html -->
     <meta name="application-name" content="{{=request.application}}">
-    <!-- Speaking of Google, don't forget to set your site up:
-         http://google.com/webmasters -->
+    
+    <!-- Speaking of Google, don't forget to set your site up: http://google.com/webmasters -->
     <meta name="google-site-verification" content="">
     
     <!-- Include stylesheets -->
-    <link rel="stylesheet" href="{{=URL('static','css/bootstrap.min.css')}}"/>
-    <link rel="stylesheet" href="{{=URL('static','css/web2py-bootstrap3.css')}}"/>
+    <link rel="stylesheet" href="{{=URL('static', 'css/bootstrap.min.css')}}"/>
+    <link rel="stylesheet" href="{{=URL('static', 'css/web2py-bootstrap3.css')}}"/>
     <link rel="stylesheet" href="{{=URL('static', 'font-awesome-4.6.3/css/font-awesome.min.css')}}"/>
-    <link rel="stylesheet" href="{{=URL('static','css/myapp.css')}}"/>
+    <link rel="stylesheet" href="{{=URL('static', 'css/myapp.css')}}"/>
     
     <!-- Include favicons -->
     <link rel="apple-touch-icon" href="{{=URL('static', 'images/favicon/apple-touch-icon.png')}}" sizes="180x180"/>
@@ -50,6 +51,9 @@
     
     <!-- This includes jquery.js, calendar.js/.css and web2py.js -->
     {{include 'web2py_ajax.html'}}
+    
+    <!-- Globally used Javascript libraries -->
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
     
     {{block head}}{{end}}
     
