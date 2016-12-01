@@ -7,6 +7,7 @@ def get_tracks():
     tracks = []
     has_more = False
     rows = db().select(db.track.ALL, limitby=(start_idx, end_idx + 1))
+    # rows.update_record()
     for i, r in enumerate(rows):
         if i < end_idx - start_idx:
             t = dict(
@@ -90,7 +91,7 @@ def _parse_spotify_tracks(results):
 
 
 def add_track_from_spotify():
-    db.track.truncate()
+    del_songs()
     tracks = _get_ids_from_spotify_for_track(request.vars.song)
     tracks_info = []
     for i in range(0,len(tracks)):
@@ -106,4 +107,6 @@ def add_track_from_spotify():
         tracks_info.append(t_id)
     return response.json(dict(track=tracks_info))
 
-# print(add_track_from_spotify("Poetic Justice"))
+def del_songs():
+    db.track.truncate()
+    return "ok"

@@ -23,13 +23,18 @@
             <button class="btn btn-primary" v-on:click="add_track_from_spotify" id="add_track_from_spotify_submit">Search</button>
         </div>
     </div>
+    <h2>Songs</h2>
     <div v-for="t in tracks">
-        <button>Add to library</button>
         <p>Artist: ${t.artist}</p>
         <p>Album: ${t.album}</p>
         <p>Song: ${t.title}</p>
+        <p>Id: ${t.id}</p>
         <p v-if="t.track_source=='spotify'"><iframe v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
+        <button>Add to library</button>
+        <hr/>
+
     </div>
+    <button v-on:click="get_more()">Load More</button>
 </div>
 
 

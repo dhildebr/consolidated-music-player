@@ -7,7 +7,11 @@
 # - user is required for authentication and authorization
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
-
+def add_to_pages(s):
+    if session.visited_pages is None:
+        session.visited_pages = [s]
+    elif s not in session.visited_pages:
+        session.visited_pages.append(s)
 
 def index():
     """
@@ -38,6 +42,10 @@ def user():
     Testing
     """
     return dict(form=auth())
+
+def library():
+    add_to_pages('library')
+    return dict(place="Library")
 
 
 @cache.action()

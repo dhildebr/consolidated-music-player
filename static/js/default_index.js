@@ -20,11 +20,19 @@ var app = function() {
     }
 
     self.get_tracks = function () {
-        $.getJSON(get_tracks_url(0, 20), function (data) {
+        $.getJSON(get_tracks_url(0, 10), function (data) {
             self.vue.tracks = data.tracks;
             self.vue.has_more = data.has_more;
             self.vue.logged_in = data.logged_in;
         })
+    };
+
+    self.get_more = function () {
+        var num_tracks = self.vue.tracks.length;
+        $.getJSON(get_tracks_url(num_tracks, num_tracks + 5), function (data) {
+            self.vue.has_more = data.has_more;
+            self.extend(self.vue.tracks, data.tracks);
+        });
     };
 
     self.add_track_from_spotify = function () {
@@ -34,11 +42,14 @@ var app = function() {
                 song: self.vue.form_song,
             },
             function (data) {
-                // $.web2py.enableElement($("#add_track_from_spotify_submit"));
-                console.log(data.track);
+                $.web2py.enableElement($("#add_track_from_spotify_submit"));
+                // for (i = 0; i < data.track.length; i++) {
+                //     self.vue.tracks.unshift(data.track[i]);
+                // }
+                console.log(data.track.length);
             }
         );
-        location.reload();
+        // location.reload();
     };
 
 
@@ -54,9 +65,10 @@ var app = function() {
             form_song: null,
         },
         methods: {
-            add_track_from_spotify: self.add_track_from_spotify
+            add_track_from_spotify: self.add_track_from_spotify,
+            get_more: self.get_more
         }
-    })
+    });
     self.get_tracks();
     $("#vue-div").show();
     return self;
