@@ -1,35 +1,3 @@
-input.search-field
-{
-  border: 3px solid #000000;
-  border-radius: 5px;
-  color: #000000;
-  font: 1.25pc "Roboto", "sans-serif";
-  margin: 5px;
-  padding: 3px 7px;
-}
-
-input.soundcloud-search
-{
-  background: #FFF1E6;
-  border-color: #FF7700;
-}
-
-input.spotify-search
-{
-  background: #F7FFE6;
-  border-color: #84BD00;
-}
-
-input.soundcloud-search:-moz-placeholder           { color: #E6842E; opacity: 1; }
-input.soundcloud-search:-ms-input-placeholder      { color: #E6842E; opacity: 1; }
-input.soundcloud-search::-moz-placeholder          { color: #E6842E; opacity: 1; }
-input.soundcloud-search::-webkit-input-placeholder { color: #E6842E; opacity: 1; }
-
-input.spotify-search:-moz-placeholder           { color: #87B324; opacity: 1; }
-input.spotify-search:-ms-input-placeholder      { color: #87B324; opacity: 1; }
-input.spotify-search::-moz-placeholder          { color: #87B324; opacity: 1; }
-input.spotify-search::-webkit-input-placeholder { color: #87B324; opacity: 1; }
-
 div.centered
 {
   margin: 0 auto;
@@ -45,4 +13,83 @@ div.main-content
   min-width: 800px;
   padding: 10px;
   width: 80%;
+}
+
+iframe.soundcloud-embed
+{
+  border: 5px solid #FF7700;
+  border-radius: 5px;
+  display: inline-block;
+  height: 300px;
+  padding: 0;
+  margin: 5px;
+  width: 300px;
+}
+
+input.local-song-upload
+{
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0.1px;
+  z-index: -1;
+}
+
+input.search-field
+{
+  border: 3px solid #000000;
+  border-radius: 5px;
+  color: #000000;
+  display: block;
+  font: 1.25pc "Roboto", "sans-serif";
+  margin: 5px auto;
+  padding: 3px 7px;
+  width: 600px;
+}
+
+input.soundcloud-search
+{
+  background: #FFF1E6;
+  border-color: #FF7700;
+  border-radius: 5px;
+  color: #E6842E;
+}
+
+input.spotify-search
+{
+  background: #F7FFE6;
+  border-color: #84BD00;
+  border-radius: 3px;
+  color: #87B324;
+}
+
+input.soundcloud-search:-moz-placeholder           { color: #E6842E; opacity: 1; }
+input.soundcloud-search:-ms-input-placeholder      { color: #E6842E; opacity: 1; }
+input.soundcloud-search::-moz-placeholder          { color: #E6842E; opacity: 1; }
+input.soundcloud-search::-webkit-input-placeholder { color: #E6842E; opacity: 1; }
+
+input.spotify-search:-moz-placeholder           { color: #87B324; opacity: 1; }
+input.spotify-search:-ms-input-placeholder      { color: #87B324; opacity: 1; }
+input.spotify-search::-moz-placeholder          { color: #87B324; opacity: 1; }
+input.spotify-search::-webkit-input-placeholder { color: #87B324; opacity: 1; }
+
+label.local-song-upload-label
+{
+  background: #E6ECFF;
+  border: 3px solid #577DE8;
+  border-radius: 3px 3px 5px 5px;
+  color: #8299D9;
+  cursor: pointer;
+  display: block;
+  font: 1.25pc "Roboto", "sans-serif";
+  padding: 3px 7px;
+  margin: 5px auto;
+  text-align: left;
+  width: 300px;
+}
+
+label.local-song-upload-label:hover
+{
+  background: #F2F5FF;
 }

@@ -1,15 +1,22 @@
 {{extend 'layout.html'}}
 
 <div class="main-content" id="vue-div">
-
+  
   <div class="centered">
-    <input class="search-field soundcloud-search" id="search-field-soundcloud" type="text" placeholder="Search Soundcloud" size="50"></input>
-    <input class="search-field spotify-search" id="search-field-spotify" type="text" placeholder="Search Spotify" size="50"></input>
+    <!-- Web searchbars -->
+    <input class="search-field soundcloud-search" id="search-field-soundcloud" type="text" placeholder="Search Soundcloud" />
+    <input class="search-field spotify-search" id="search-field-spotify" type="text" placeholder="Search Spotify" />
+    
+    <!-- Local file upload -->
+    <input class="local-song-upload" id="local-song-upload" type="file" accept="audio/*" />
+    <label class="local-song-upload-label" id="local-song-upload-label" for="local-song-upload">
+      <i class="fa fa-upload"></i> Upload your own music
+    </label>
   </div>
   
   <div id="search-results">
     <div class="song-player" v-for="track in tracks">
-    
+      
     </div>
   </div>
   
