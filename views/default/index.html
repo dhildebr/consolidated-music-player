@@ -6,6 +6,7 @@
     var tracks_url = "{{=URL('api', 'get_tracks')}}";
     var del_track_url = "{{=URL('api', 'del_track', user_signature=True)}}";
     var add_track_from_spotify_url = "{{=URL('api', 'add_track_from_spotify', user_signature=True)}}";
+    var add_track_to_library_url = "{{=URL('api', 'add_track_to_library', user_signature=True)}}";
 </script>
 
 {{end}}
@@ -30,7 +31,8 @@
         <p>Song: ${t.title}</p>
         <p>Id: ${t.id}</p>
         <p v-if="t.track_source=='spotify'"><iframe v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
-        <button>Add to library</button>
+        <button v-on:click="add_track_to_library(t.id)">Add to library</button>
+        ${t}
         <hr/>
 
     </div>

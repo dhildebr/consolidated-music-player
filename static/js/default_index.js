@@ -49,9 +49,19 @@ var app = function() {
                 console.log(data.track.length);
             }
         );
-        // location.reload();
+        location.reload();
     };
 
+    self.add_track_to_library = function (id) {
+      $.post(add_track_to_library_url,
+          {
+              id: id
+          },
+          function(){
+            console.log(id);
+          }
+      )
+    };
 
 
     self.vue = new Vue({
@@ -66,7 +76,8 @@ var app = function() {
         },
         methods: {
             add_track_from_spotify: self.add_track_from_spotify,
-            get_more: self.get_more
+            get_more: self.get_more,
+            add_track_to_library: self.add_track_to_library
         }
     });
     self.get_tracks();

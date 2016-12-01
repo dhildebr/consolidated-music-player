@@ -19,5 +19,13 @@ db.define_table('track',
                 Field('track_uri')
                 )
 
+db.define_table('library',
+                Field('artist'),
+                Field('album'),
+                Field('title'),
+                Field('duration', 'float'),
+                Field('track_source', default='manual'),
+                Field('track_uri')
+                )
 # after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)

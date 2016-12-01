@@ -1,5 +1,6 @@
 import requests
 
+# Searching for tracks
 def get_tracks():
     start_idx = int(request.vars.start_idx) if request.vars.start_idx is not None else 0
     end_idx = int(request.vars.end_idx) if request.vars.end_idx is not None else 0
@@ -16,7 +17,8 @@ def get_tracks():
                 album=r.album,
                 title=r.title,
                 duration=r.duration,
-                track_source = r.track_source
+                track_source = r.track_source,
+                track_uri = r.track_uri
             )
 
             if r.track_source == 'spotify':
@@ -110,3 +112,28 @@ def add_track_from_spotify():
 def del_songs():
     db.track.truncate()
     return "ok"
+
+# --------------------------------
+
+# Add selected track to database
+
+def add_track_to_library():
+    library = []
+    track = db(db.track.id==request.vars.id).select()
+    for t in track:
+        artist = t.artist
+        album = t.album
+        title = t.title
+        duration = t.duration
+        track_source = t.track_source
+        track_uri = t.track_uri
+    t_id = db.library.insert(
+        artist = artist,
+        album = album,
+        title = title,
+        duration = duration,
+        track_source = track_source,
+        track_uri = track_uri
+    )
+    library.append(t_id)
+    return response.json(dict(id=library))
