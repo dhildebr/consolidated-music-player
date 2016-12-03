@@ -136,4 +136,43 @@ def add_track_to_library():
         track_uri = track_uri
     )
     library.append(t_id)
-    return response.json(dict(id=library))
+    response.flash = T(title + " added to library")
+    return response.json(dict(library=library))
+
+def get_library():
+    start_idx = int(request.vars.start_idx) if request.vars.start_idx is not None else 0
+    end_idx = int(request.vars.end_idx) if request.vars.end_idx is not None else 0
+    # We just generate a lot of of data.
+    tracks = []
+    has_more = False
+    rows = db().select(db.library.ALL, limitby=(start_idx, end_idx + 1))
+    # rows.update_record()
+    for i, r in enumerate(rows):
+        if i < end_idx - start_idx:
+            t = dict(
+                id = r.id,
+                artist=r.artist,
+                album=r.album,
+                title=r.title,
+                duration=r.duration,
+                track_source = r.track_source,
+                track_uri = r.track_uri
+            )
+
+            if r.track_source == 'spotify':
+                t['audio_file'] = "https://embed.spotify.com/?uri={}&theme=white".format(r.track_uri)
+            else:
+                t['audio_file'] = "#"
+            tracks.append(t)
+        else:
+            has_more = True
+    logged_in = auth.user_id is not None
+    return response.json(dict(
+        library=tracks,
+        logged_in=logged_in,
+        has_more=has_more,
+    ))
+
+def del_from_library():
+    db(db.library.id == request.vars.track_id).delete()
+    return "ok"

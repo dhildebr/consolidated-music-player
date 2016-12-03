@@ -58,7 +58,7 @@ var app = function() {
               id: id
           },
           function(){
-            console.log(id);
+            console.log("Added");
           }
       )
     };
