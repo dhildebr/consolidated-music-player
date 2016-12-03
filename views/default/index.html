@@ -8,9 +8,9 @@
     <input class="search-field spotify-search" id="search-field-spotify" type="text" placeholder="Search Spotify" />
     
     <!-- Local file upload -->
-    <input class="local-song-upload" id="local-song-upload" type="file" accept="audio/*" />
+    <input class="local-song-upload"       id="local-song-upload"       type="file" accept="audio/*" data-multiple-caption="{count} files selected" multiple />
     <label class="local-song-upload-label" id="local-song-upload-label" for="local-song-upload">
-      <i class="fa fa-upload"></i> Upload your own music
+      <i class="fa fa-upload"></i> <span>Upload your own music</span>
     </label>
   </div>
   
@@ -24,4 +24,5 @@
 
 {{block page_end_js}}
 <script src="{{=URL('static', 'js/default.index.js')}}"></script>
+<script src="{{=URL('static', 'js/local-song-upload-label.js')}}"></script>
 {{end}}
