@@ -89,7 +89,7 @@ input.local-song-upload + label.local-song-upload-label
   width: 300px;
 }
 
-label.local-song-upload-label:hover
+input.local-song-upload + label.local-song-upload-label:hover
 {
   background: #F2F5FF;
 }
