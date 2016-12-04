@@ -3,9 +3,14 @@
 {{block head}}
 <script>
   var tracks_url = "{{=URL('api', 'get_tracks')}}";
-  var del_track_url = "{{=URL('api', 'del_track', user_signature=True)}}";
-  var add_track_from_spotify_url = "{{=URL('api', 'add_track_from_spotify', user_signature=True)}}";
+  
+  var add_track_from_soundcloud_url = "{{=URL('api', 'add_track_from_soundcloud', user_signature=True)}}";
+  var add_track_from_spotify_url    = "{{=URL('api', 'add_track_from_spotify', user_signature=True)}}";
+  var add_track_from_local_url      = "{{=URL('api', 'add_track_from_local', user_signature=True)}}";
+  
   var add_track_to_library_url = "{{=URL('api', 'add_track_to_library', user_signature=True)}}";
+  
+  var del_track_url = "{{=URL('api', 'del_track', user_signature=True)}}";
 </script>
 {{end}}
 
@@ -38,20 +43,22 @@
     </div>
   </div>
   
-  <a class="btn btn-primary" href="{{=URL('default', 'library')}}">Library</a>
-  
-  <h2>Songs</h2>
-  
-  <div v-for="t in tracks">
-    <p>Artist: ${t.artist}</p>
-    <p>Album: ${t.album}</p>
-    <p>Song: ${t.title}</p>
-    <p>Id: ${t.id}</p>
-    <p v-if="t.track_source == 'spotify'"><iframe v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
-    <button v-on:click="add_track_to_library(t.id)">Add to library</button>
+  <div class="search-results" id="search-results">
+    <a class="btn btn-primary" href="{{=URL('default', 'library')}}">Library</a>
+    
+    <h2>Songs</h2>
+    
+    <div v-for="t in tracks">
+      <p>Artist: ${t.artist}</p>
+      <p>Album: ${t.album}</p>
+      <p>Song: ${t.title}</p>
+      <p>Id: ${t.id}</p>
+      <p v-if="t.track_source == 'spotify'"><iframe v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
+      <button v-on:click="add_track_to_library(t.id)">Add to library</button>
+    </div>
+    
+    <button class="btn btn-default" id="get-more-button" v-on:click="get_more()">Load More</button>
   </div>
-  
-  <button class="btn btn-default" id="get-more-button" v-on:click="get_more()">Load More</button>
 </div>
 
 {{block page_end_js}}

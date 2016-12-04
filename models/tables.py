@@ -10,6 +10,10 @@
 def get_user_email():
     return auth.user.email if auth.user else None
 
+db.define_table('soundcloud_urls',
+                Field('url', 'text')
+                )
+
 db.define_table('track',
                 Field('artist'),
                 Field('album'),
@@ -20,7 +24,8 @@ db.define_table('track',
                 )
 
 db.define_table('local_tracks',
-                Field('local_track', 'upload')
+                Field('track', 'upload'),
+                Field('track_file_name')
                 )
 
 db.define_table('library',

@@ -93,6 +93,9 @@ def _parse_spotify_tracks(results):
   return ret_tracks
 
 
+def add_track_from_soundcloud():
+  return response.json(dict())
+
 def add_track_from_spotify():
   del_songs()
   tracks = _get_ids_from_spotify_for_track(request.vars.song)
@@ -109,6 +112,19 @@ def add_track_from_spotify():
     )
     tracks_info.append(t_id)
   return response.json(dict(track=tracks_info))
+
+def add_track_from_local():
+  files = request.vars.files
+  file_names = request.vars.file_names
+  track_ids = []
+  
+  for i in range(0, len(files)):
+    track_ids.append(db.local_tracks.insert(
+      track = files[i],
+      track_file_name = file_names[i]
+    ))
+  
+  return response.json(dict(track_ids=track_ids))
 
 def del_songs():
   db.track.truncate()

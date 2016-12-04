@@ -1,9 +1,3 @@
-var Track = function(trackSource, name)
-{
-  this.trackSource = trackSource;
-  this.name = name;
-};
-
 var app = function()
 {
   var self = {};
@@ -15,7 +9,7 @@ var app = function()
         a.push(b[i]);
       }
   };
-
+  
   function get_tracks_url(start_idx, end_idx)
   {
     var pp = {
@@ -24,7 +18,7 @@ var app = function()
     };
     return tracks_url + "?" + $.param(pp);
   }
-
+  
   self.get_tracks = function()
   {
     $.getJSON(get_tracks_url(0, 10), function (data) {
@@ -33,7 +27,7 @@ var app = function()
       self.vue.logged_in = data.logged_in;
     })
   };
-
+  
   self.get_more = function()
   {
     var num_tracks = self.vue.tracks.length;
@@ -42,7 +36,7 @@ var app = function()
       self.extend(self.vue.tracks, data.tracks);
     });
   };
-
+  
   self.add_track_from_spotify = function()
   {
     // The submit button to add a track has been added.
@@ -61,7 +55,7 @@ var app = function()
     
     location.reload();
   };
-
+  
   self.add_track_to_library = function(id)
   {
     $.post(add_track_to_library_url,
@@ -80,16 +74,41 @@ var app = function()
     if(selectedFiles == null)
       return;
     
-    for(var i = 0; i < selectedFiles.length; ++i)
-      console.log("File: " + selectedFiles[i].name);
-      /*$.post("",
-      {
-        
-      ),
-      function()
-      {
-        
-      }*/;
+    var acceptedFiles = {};
+    var acceptedFileNames = {};
+    var rejectedFileNames = [];
+    
+    var fileAcceptCount = 0;
+    for(var i = 0; i < selectedFiles.length; ++i) {
+      var fileSizeMB = ((selectedFiles[i].size / 1024) / 1024);
+      console.log("Selected file: " + selectedFiles[i].name);
+      if(fileSizeMB <= 20) {
+        console.log("File accepted.");
+        acceptedFiles[fileAcceptCount.toString()] = selectedFiles[i];
+        acceptedFileNames[fileAcceptCount.toString()] = selectedFiles[i].name;
+        ++fileAcceptCount;
+      }
+      else {
+        console.log("The size of the file is too damn high! Files over 20MB not accepted.");
+        rejectedFileNames.push(selectedFiles[i].name);
+      }
+    }
+    
+    $.post(add_track_from_local_url,
+    {
+      files: acceptedFiles,
+      file_names: acceptedFileNames
+    },
+    function(data)
+    {
+      console.log(data.track_ids);
+    });
+    
+    if(rejectedFileNames.length > 0) {
+      alert("Music files over 20MB are not accepted. The following offenders have been disregarded:\n"
+          + rejectedFileNames.join("\n")
+      );
+    }
   }
   
   self.vue = new Vue({
