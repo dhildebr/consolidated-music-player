@@ -1,0 +1,67 @@
+.btn.btn-default.btn-gradient
+{
+  background: linear-gradient(to bottom,  #4D4D4D 50%, #404040 50%);
+  background: -moz-linear-gradient(top,  #4D4D4D 50%, #404040 50%);
+  background: -ms-linear-gradient(top,  #4D4D4D 50%, #404040 50%);
+  background: -o-linear-gradient(top,  #4D4D4D 50%, #404040 50%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #4D4D4D), color-stop(50%, #404040));
+  background: -webkit-linear-gradient(top,  #4D4D4D 50%, #404040 50%);
+  border-radius: 3px;
+}
+
+.btn.btn-default.btn-gradient:focus,
+.btn.btn-default.btn-gradient:hover,
+.open > .dropdown-toggle.btn.btn-default.btn-gradient
+{
+  background: linear-gradient(to bottom,  #595959 50%, #4D4D4D 50%);
+  background: -moz-linear-gradient(top,  #595959 50%, #4D4D4D 50%);
+  background: -ms-linear-gradient(top,  #595959 50%, #4D4D4D 50%);
+  background: -o-linear-gradient(top,  #595959 50%, #4D4D4D 50%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #7397ff), color-stop(50%, #4D4D4D));
+  background: -webkit-linear-gradient(top,  #595959 50%, #4D4D4D 50%);
+}
+
+.btn.btn-default.btn-gradient:active,
+.btn.btn-default.btn-gradient.active
+{
+  background: linear-gradient(to bottom,  #404040 50%, #333333 50%);
+  background: -moz-linear-gradient(top,  #404040 50%, #333333 50%);
+  background: -ms-linear-gradient(top,  #404040 50%, #333333 50%);
+  background: -o-linear-gradient(top,  #404040 50%, #333333 50%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #404040), color-stop(50%, #333333));
+  background: -webkit-linear-gradient(top,  #404040 50%, #333333 50%);
+}
+
+.btn.btn-primary.btn-gradient
+{
+  background: linear-gradient(to bottom,  #6089FF 50%, #577DE8 50%);
+  background: -moz-linear-gradient(top,  #6089FF 50%, #577DE8 50%);
+  background: -ms-linear-gradient(top,  #6089FF 50%, #577DE8 50%);
+  background: -o-linear-gradient(top,  #6089FF 50%, #577DE8 50%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #6089FF), color-stop(50%, #577DE8));
+  background: -webkit-linear-gradient(top,  #6089FF 50%, #577DE8 50%);
+  border-radius: 3px;
+}
+
+.btn.btn-primary.btn-gradient:focus,
+.btn.btn-primary.btn-gradient:hover,
+.open > .dropdown-toggle.btn.btn-primary.btn-gradient
+{
+  background: linear-gradient(to bottom,  #7397ff 50%, #6089FF 50%);
+  background: -moz-linear-gradient(top,  #7397ff 50%, #6089FF 50%);
+  background: -ms-linear-gradient(top,  #7397ff 50%, #6089FF 50%);
+  background: -o-linear-gradient(top,  #7397ff 50%, #6089FF 50%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #7397ff), color-stop(50%, #6089FF));
+  background: -webkit-linear-gradient(top,  #7397ff 50%, #6089FF 50%);
+}
+
+.btn.btn-primary.btn-gradient:active,
+.btn.btn-primary.btn-gradient.active
+{
+  background: linear-gradient(to bottom,  #577DE8 50%, #5175d9 50%);
+  background: -moz-linear-gradient(top,  #577DE8 50%, #5175d9 50%);
+  background: -ms-linear-gradient(top,  #577DE8 50%, #5175d9 50%);
+  background: -o-linear-gradient(top,  #577DE8 50%, #5175d9 50%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #577DE8), color-stop(50%, #5175d9));
+  background: -webkit-linear-gradient(top,  #577DE8 50%, #5175d9 50%);
+}

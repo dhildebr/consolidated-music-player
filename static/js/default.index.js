@@ -74,35 +74,28 @@ var app = function()
     if(selectedFiles == null)
       return;
     
-    var acceptedFiles = {};
-    var acceptedFileNames = {};
     var rejectedFileNames = [];
     
-    var fileAcceptCount = 0;
     for(var i = 0; i < selectedFiles.length; ++i) {
       var fileSizeMB = ((selectedFiles[i].size / 1024) / 1024);
       console.log("Selected file: " + selectedFiles[i].name);
       if(fileSizeMB <= 20) {
         console.log("File accepted.");
-        acceptedFiles[fileAcceptCount.toString()] = selectedFiles[i];
-        acceptedFileNames[fileAcceptCount.toString()] = selectedFiles[i].name;
-        ++fileAcceptCount;
+        $.post(add_track_from_local_url,
+        {
+          file: selectedFiles[i],
+          file_name: selectedFiles[i].name
+        },
+        function(data)
+        {
+          console.log("Inserted file with ID: " + data.track_id);
+        });
       }
       else {
         console.log("The size of the file is too damn high! Files over 20MB not accepted.");
         rejectedFileNames.push(selectedFiles[i].name);
       }
     }
-    
-    $.post(add_track_from_local_url,
-    {
-      files: acceptedFiles,
-      file_names: acceptedFileNames
-    },
-    function(data)
-    {
-      console.log(data.track_ids);
-    });
     
     if(rejectedFileNames.length > 0) {
       alert("Music files over 20MB are not accepted. The following offenders have been disregarded:\n"

@@ -114,17 +114,12 @@ def add_track_from_spotify():
   return response.json(dict(track=tracks_info))
 
 def add_track_from_local():
-  files = request.vars.files
-  file_names = request.vars.file_names
-  track_ids = []
+  track_id = db.local_tracks.insert(
+    track = request.vars.file,
+    track_file_name = request.vars.file_name
+  )
   
-  for i in range(0, len(files)):
-    track_ids.append(db.local_tracks.insert(
-      track = files[i],
-      track_file_name = file_names[i]
-    ))
-  
-  return response.json(dict(track_ids=track_ids))
+  return response.json(dict(track_id=track_id))
 
 def del_songs():
   db.track.truncate()

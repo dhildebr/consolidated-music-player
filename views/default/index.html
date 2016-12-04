@@ -44,7 +44,7 @@
   </div>
   
   <div class="search-results" id="search-results">
-    <a class="btn btn-primary" href="{{=URL('default', 'library')}}">Library</a>
+    <a class="btn btn-primary btn-gradient" href="{{=URL('default', 'library')}}">Library</a>
     
     <h2>Songs</h2>
     
@@ -57,7 +57,7 @@
       <button v-on:click="add_track_to_library(t.id)">Add to library</button>
     </div>
     
-    <button class="btn btn-default" id="get-more-button" v-on:click="get_more()">Load More</button>
+    <button class="btn btn-default btn-gradient" id="get-more-button" v-on:click="get_more()">Load More</button>
   </div>
 </div>
 

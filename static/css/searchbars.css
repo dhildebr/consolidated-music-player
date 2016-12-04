@@ -9,7 +9,7 @@ input.search-field
   font: 1.25pc "Roboto", "sans-serif";
   margin: 2.5px 0 2.5px auto;
   padding: 3px 7px;
-  width: 600px;
+  width: 550px;
 }
 
 div.search-field-button
@@ -98,7 +98,7 @@ input.local-song-upload + label.local-song-upload-label
   padding: 3px 7px;
   margin: 0 0 5px auto;
   text-align: left;
-  width: 300px;
+  width: 250px;
 }
 
 input.local-song-upload + label.local-song-upload-label:hover
