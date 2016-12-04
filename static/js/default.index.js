@@ -51,7 +51,7 @@ var app = function()
         song: self.vue.form_song,
       },
       function (data) {
-        $.web2py.enableElement($("#add_track_from_spotify_submit"));
+        $.web2py.enableElement($("#spotify-search-button"));
         // for (i = 0; i < data.track.length; i++) {
         //     self.vue.tracks.unshift(data.track[i]);
         // }

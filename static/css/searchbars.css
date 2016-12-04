@@ -1,0 +1,134 @@
+input.search-field
+{
+  background: #FFFFFF;
+  border: 3px solid #000000;
+  border-radius: 5px 0 0 5px;
+  border-right: 1px dotted #000000;
+  color: #000000;
+  display: inline-block;
+  font: 1.25pc "Roboto", "sans-serif";
+  margin: 2.5px 0 2.5px auto;
+  padding: 3px 7px;
+  width: 600px;
+}
+
+div.search-field-button
+{
+  background: #FFFFFF;
+  border: 3px solid #000000;
+  border-left: 0 solid transparent;
+  border-radius: 0 5px 5px 0;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font: 1.25pc "Roboto", "sans-serif";
+  margin: 2.5px auto 2.5px 0;
+  padding: 3px 7px;
+  width: 50px;
+}
+
+input.soundcloud-search
+{
+  background: #FFF1E6;
+  border-color: #FF7700;
+  color: #E6842E;
+}
+
+div.soundcloud-search-button
+{
+  background: #FFF1E6;
+  border-color: #FF7700;
+  color: #E6842E;
+}
+
+div.soundcloud-search-button:hover
+{
+  background: #fff8f2;
+}
+
+input.soundcloud-search:-moz-placeholder           { color: #E6842E; opacity: 1; }
+input.soundcloud-search:-ms-input-placeholder      { color: #E6842E; opacity: 1; }
+input.soundcloud-search::-moz-placeholder          { color: #E6842E; opacity: 1; }
+input.soundcloud-search::-webkit-input-placeholder { color: #E6842E; opacity: 1; }
+
+input.spotify-search
+{
+  background: #F7FFE6;
+  border-color: #84BD00;
+  color: #87B324;
+}
+
+div.spotify-search-button
+{
+  background: #F7FFE6;
+  border-color: #84BD00;
+  color: #87B324;
+}
+
+div.spotify-search-button:hover
+{
+  background: #fbfff2;
+}
+
+input.spotify-search:-moz-placeholder           { color: #87B324; opacity: 1; }
+input.spotify-search:-ms-input-placeholder      { color: #87B324; opacity: 1; }
+input.spotify-search::-moz-placeholder          { color: #87B324; opacity: 1; }
+input.spotify-search::-webkit-input-placeholder { color: #87B324; opacity: 1; }
+
+input.local-song-upload
+{
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0.1px;
+  z-index: -1;
+}
+
+input.local-song-upload + label.local-song-upload-label
+{
+  background: #E6ECFF;
+  border: 3px solid #577DE8;
+  border-radius: 3px 0px 0px 5px;
+  border-right: 1px dotted #577DE8;
+  color: #8299D9;
+  cursor: pointer;
+  display: inline-block;
+  font: 1.25pc "Roboto", "sans-serif";
+  padding: 3px 7px;
+  margin: 0 0 5px auto;
+  text-align: left;
+  width: 300px;
+}
+
+input.local-song-upload + label.local-song-upload-label:hover
+{
+  background: #F2F5FF;
+}
+
+div.local-song-upload-button
+{
+  background: #E6ECFF;
+  border: 3px solid #577DE8;
+  border-left: 0 solid transparent;
+  border-radius: 0px 3px 5px 0px;
+  color: #577DE8;
+  cursor: pointer;
+  display: inline-block;
+  font: 1.25pc "Roboto", "sans-serif";
+  padding: 3px 7px;
+  margin: 2.5px auto 5px 0;
+  text-align: center;
+  width: 50px;
+}
+
+div.local-song-upload-button:hover
+{
+  background: #F2F5FF;
+  color: #8299D9;
+}
+
+input.local-song-upload + label.local-song-upload-label:-moz-placeholder           { color: #8299D9; opacity: 1; }
+input.local-song-upload + label.local-song-upload-label:-ms-input-placeholder      { color: #8299D9; opacity: 1; }
+input.local-song-upload + label.local-song-upload-label::-moz-placeholder          { color: #8299D9; opacity: 1; }
+input.local-song-upload + label.local-song-upload-label::-webkit-input-placeholder { color: #8299D9; opacity: 1; }

@@ -11,17 +11,31 @@
 
 <div class="main-content" id="vue-div">
   
+  <!-- Soundcloud bar -->
   <div class="centered">
-    <!-- Web searchbars -->
     <input class="search-field soundcloud-search" id="search-field-soundcloud" type="text" placeholder="Soundcloud" />
+    <div class="search-field-button soundcloud-search-button" id="soundcloud-search-button">
+      <i class="fa fa-plus"></i>
+    </div>
+  </div>
+  
+  <!-- Spotify bar -->
+  <div class="centered">
     <input class="search-field spotify-search" id="search-field-spotify" type="text" placeholder="Spotify" />
-    
-    <!-- Local file upload -->
+    <div class="search-field-button spotify-search-button" id="spotify-search-button" v-on:click="add_track_from_spotify">
+      <i class="fa fa-search"></i>
+    </div>
+  </div>
+  
+  <!-- Local file upload -->
+  <div class="centered">
     <input class="local-song-upload"       id="local-song-upload"       type="file" accept="audio/*" data-multiple-caption="{count} files selected" multiple />
     <label class="local-song-upload-label" id="local-song-upload-label" for="local-song-upload">
-      <span>Upload your own music</span>
+      <span id="local-song-upload-text">Upload your own music</span>
     </label>
-    <i class="fa fa-upload local-song-upload-button" id="local-song-upload-button" v-on:click="upload_local_file();"></i>
+    <div class="local-song-upload-button" v-on:click="upload_local_file();">
+      <i class="fa fa-upload"></i>
+    </div>
   </div>
   
   <a class="btn btn-primary" href="{{=URL('default', 'library')}}">Library</a>
