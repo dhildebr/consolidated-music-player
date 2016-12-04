@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+<script>
+  var library_url = "{{=URL('api', 'get_library')}}";
+  var del_track_url = "{{=URL('api', 'del_from_library', user_signature=True)}}";
+</script>
+{{end}}
+
+<div id="vue-div">
+  <a href="{{=URL('default', 'index')}}" class="btn btn-primary">Index</a>
+  <div v-for="l in library">
+    <p>Artist: ${l.artist}</p>
+    <p>Album: ${l.album}</p>
+    <p>Song: ${l.title}</p>
+    <p v-if="l.track_source=='spotify'"><iframe v-bind:src="l.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
+    <button><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"></i></button>
+  </div>
+</div>
+
+<script src="{{=URL('static', 'js/library.js')}}"></script>
