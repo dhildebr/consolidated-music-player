@@ -19,8 +19,9 @@
     <!-- Local file upload -->
     <input class="local-song-upload"       id="local-song-upload"       type="file" accept="audio/*" data-multiple-caption="{count} files selected" multiple />
     <label class="local-song-upload-label" id="local-song-upload-label" for="local-song-upload">
-      <i class="fa fa-upload"></i> <span>Upload your own music</span>
+      <span>Upload your own music</span>
     </label>
+    <i class="fa fa-upload local-song-upload-button" id="local-song-upload-button" v-on:click="upload_local_file();"></i>
   </div>
   
   <a class="btn btn-primary" href="{{=URL('default', 'library')}}">Library</a>

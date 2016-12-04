@@ -74,6 +74,24 @@ var app = function()
     )
   };
   
+  self.upload_local_file = function()
+  {
+    var selectedFiles = $("#local-song-upload")[0].files;
+    if(selectedFiles == null)
+      return;
+    
+    for(var i = 0; i < selectedFiles.length; ++i)
+      console.log("File: " + selectedFiles[i].name);
+      /*$.post("",
+      {
+        
+      ),
+      function()
+      {
+        
+      }*/;
+  }
+  
   self.vue = new Vue({
     el: "#vue-div",
     delimiters: ['${', '}'],
@@ -89,13 +107,14 @@ var app = function()
     methods: {
       add_track_from_spotify: self.add_track_from_spotify,
       get_more: self.get_more,
-      add_track_to_library: self.add_track_to_library
+      add_track_to_library: self.add_track_to_library,
+      upload_local_file: self.upload_local_file
     }
-    
-    self.get_tracks();
-    $("#vue-div").show();
-    return self;
   });
+  
+  self.get_tracks();
+  $("#vue-div").show();
+  return self;
 };
 
 var APP = null;

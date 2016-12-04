@@ -93,3 +93,10 @@ input.local-song-upload + label.local-song-upload-label:hover
 {
   background: #F2F5FF;
 }
+
+i.local-song-upload-button
+{
+  color: #577DE8;
+  cursor: pointer;
+  font-size: 1.25pc;
+}
