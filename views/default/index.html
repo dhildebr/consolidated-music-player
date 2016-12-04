@@ -2,6 +2,7 @@
 
 {{block head}}
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
+<link rel="stylesheet" href="{{=URL('static', 'css/index.css')}}">
 <script>
     var tracks_url = "{{=URL('api', 'get_tracks')}}";
     var del_track_url = "{{=URL('api', 'del_track', user_signature=True)}}";
@@ -12,28 +13,30 @@
 {{end}}
 
 <div class="main-content" id="vue-div">
-
-    <div id="vue-div">
+    <div>
         <div id="soundcloud_div" class="centered">
             <input class="search-field soundcloud-search" id="search-field-soundcloud" placeholder="SoundCloud" type="text" size="50"></input>
             <button class="btn btn-primary">Search</button>
         </div>
 
         <div id="spotify_div" class="centered">
-            <input class="search-field spotify-search" id="search-field-soundcloud" placeholder="Spotify" type="text" size="50" v-model="form_song"></input>
-            <button class="btn btn-primary" v-on:click="add_track_from_spotify" id="add_track_from_spotify_submit">Search</button>
+            <select id="dropdown" v-on:change="dropdown_select">
+                <option value="tracks">Tracks</option>
+                <option value="artist">Artist</option>
+            </select>
+            <input class="search-field spotify-search" id="search-field-soundcloud" placeholder="Spotify" type="text" size="50" v-model="form_input">
+            <button v-if="dropdown=='tracks'" class="btn btn-primary" v-on:click="add_track_from_spotify" id="add_track_from_spotify_submit">Search</button>
+            <button v-if="dropdown=='artist'" class="btn btn-primary" v-on:click="add_track_from_spotify" id="add_track_from_spotify_submit">Search</button>
         </div>
     </div>
-    <a href="{{=URL('default', 'library')}}" class="btn btn-primary">Library</a>
-    <h2>Songs</h2>
-    <div v-for="t in tracks">
-        <p>Artist: ${t.artist}</p>
-        <p>Album: ${t.album}</p>
+    <a href="{{=URL('default', 'library')}}" class="btn btn-primary" v-if="logged_in">Library</a>
+    <div v-for="t in tracks" class="spotify_search">
+        <p id="artist">${t.artist}</p>
+        <p>${t.user_email}</p>
         <p>Song: ${t.title}</p>
-        <p>Id: ${t.id}</p>
-        <p v-if="t.track_source=='spotify'"><iframe v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
-        <button v-on:click="add_track_to_library(t.id)">Add to library</button>
-        <hr/>
+        <p>Album: ${t.album}</p>
+        <p v-if="t.track_source=='spotify'"><iframe id="iframe" v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
+        <button v-on:click="add_track_to_library(t.id)" v-if="logged_in">Add to library</button>
 
     </div>
     <button v-on:click="get_more()">Load More</button>

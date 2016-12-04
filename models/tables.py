@@ -16,7 +16,8 @@ db.define_table('track',
                 Field('title'),
                 Field('duration', 'float'),
                 Field('track_source',default='manual'),
-                Field('track_uri')
+                Field('track_uri'),
+                Field('user_email', default=auth.user.email if auth.user_id else None)
                 )
 
 db.define_table('library',
@@ -25,7 +26,8 @@ db.define_table('library',
                 Field('title'),
                 Field('duration', 'float'),
                 Field('track_source', default='manual'),
-                Field('track_uri')
+                Field('track_uri'),
+                Field('user_email', default=auth.user.email if auth.user_id else None)
                 )
 # after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)

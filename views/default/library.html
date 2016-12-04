@@ -1,6 +1,7 @@
 {{extend 'layout.html'}}
 {{block head}}
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
+<link rel="stylesheet" href="{{=URL('static', 'css/library.css')}}">
 <script>
     var library_url = "{{=URL('api', 'get_library')}}";
     var del_track_url = "{{=URL('api', 'del_from_library', user_signature=True)}}";
@@ -9,12 +10,23 @@
 
 <div id="vue-div">
     <a href="{{=URL('default', 'index')}}" class="btn btn-primary">Index</a>
-    <div v-for="l in library">
-        <p>Artist: ${l.artist}</p>
-        <p>Album: ${l.album}</p>
-        <p>Song: ${l.title}</p>
-        <p v-if="l.track_source=='spotify'"><iframe v-bind:src="l.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
-        <button><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"></i></button>
+    <div class="spotify_library">
+        <table style="width:100%">
+            <tr>
+                <th>Song</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr v-if="l.track_source=='spotify'"  v-for="l in library" class="spotify">
+                    <td>${l.title}</td>
+                    <td>${l.artist}</td>
+                    <td>${l.album}</td>
+                    <td><iframe v-if="l.track_source=='spotify'" v-bind:src="l.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></td>
+                    <td><button class="btn btn-danger"><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"> Delete</i></button></td>
+            </tr>
+        </table>
     </div>
 
 

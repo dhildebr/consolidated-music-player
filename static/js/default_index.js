@@ -1,3 +1,4 @@
+
 var app = function() {
 
     var self = {};
@@ -35,18 +36,37 @@ var app = function() {
         });
     };
 
+    self._get_track_id_from_spotify = function(){
+        $.post(_get_track_id_from_spotify,
+            {
+                dropdown: self.vue.dropdown
+            }
+        );
+
+    }
+
+    self._get_ids_from_spotify_for_track = function(){
+        $.post(_get_ids_spotify_for_track,
+            {
+                dropdown: self.vue.dropdown
+            }
+        );
+
+    }
+
     self.add_track_from_spotify = function () {
         // The submit button to add a track has been added.
         $.post(add_track_from_spotify_url,
             {
-                song: self.vue.form_song,
+                input: self.vue.form_input,
+                dropdown: self.vue.dropdown
             },
             function (data) {
                 $.web2py.enableElement($("#add_track_from_spotify_submit"));
                 // for (i = 0; i < data.track.length; i++) {
                 //     self.vue.tracks.unshift(data.track[i]);
                 // }
-                console.log(data.track.length);
+                console.log(self.vue.dropdown);
             }
         );
         location.reload();
@@ -58,10 +78,14 @@ var app = function() {
               id: id
           },
           function(){
-            console.log("Added");
+              console.log("Added");
           }
       )
     };
+
+    self.dropdown_select = function(){
+        self.vue.dropdown = document.getElementById("dropdown").value;
+    }
 
 
     self.vue = new Vue({
@@ -72,12 +96,14 @@ var app = function() {
             tracks: [],
             logged_in: false,
             has_more: false,
-            form_song: null,
+            form_input: null,
+            dropdown: document.getElementById("dropdown").value,
         },
         methods: {
             add_track_from_spotify: self.add_track_from_spotify,
             get_more: self.get_more,
-            add_track_to_library: self.add_track_to_library
+            add_track_to_library: self.add_track_to_library,
+            dropdown_select: self.dropdown_select
         }
     });
     self.get_tracks();
