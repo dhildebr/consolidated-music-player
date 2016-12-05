@@ -10,7 +10,7 @@ def get_tracks_from_soundcloud():
   
   rows = db.select(db.soundcloud_urls.ALL, limitby=(start_idx, end_idx + 1))
   for i, r in enumerate(rows):
-    if i < (end_idx - start_idx)
+    if i < (end_idx - start_idx):
       tracks.append(dict(
         id=r.id,
         url=r.url
@@ -27,7 +27,7 @@ def get_tracks_from_soundcloud():
 # Searching for tracks
 def get_tracks_from_spotify():
   start_idx = int(request.vars.start_idx) if (request.vars.start_idx is not None) else 0
-  end_idx   = int(request.vars.end_idx)   if (request.vars.end_idxis not None)    else 0
+  end_idx   = int(request.vars.end_idx)   if (request.vars.end_idx is not None) else 0
   # We just generate a lot of of data.
   tracks = []
   has_more = False

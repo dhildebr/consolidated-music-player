@@ -31,7 +31,7 @@ var app = function()
       end_idx: end_idx
     };
     
-    return get_tracks_from_spotify_url + "?" + $.param(pp);
+    return spotify_url + "?" + $.param(pp);
   }
   
   // ************************************************ Generate URLs ************************************************* //
