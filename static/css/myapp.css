@@ -1,13 +1,13 @@
-/*div.main-content*/
-/*{*/
-  /*font-size: 0pc;*/
-  /*height: 100%;*/
-  /*margin: 0 auto;*/
-  /*max-width: 1600px;*/
-  /*min-width: 800px;*/
-  /*padding: 10px;*/
-  /*width: 80%;*/
-/*}*/
+div.main-content
+{
+  font-size: 0;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1600px;
+  min-width: 800px;
+  padding: 10px;
+  width: 80%;
+}
 
 div.centered
 {
@@ -27,11 +27,7 @@ iframe.soundcloud-embed
   width: 300px;
 }
 
-p{
+p
+{
   font-size: 1pc;
-}
-
-select{
-  width: 100px;
-  height: 30px;
 }

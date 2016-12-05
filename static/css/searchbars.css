@@ -7,6 +7,7 @@ input.search-field
   color: #000000;
   display: inline-block;
   font: 1.25pc "Roboto", "sans-serif";
+  height: 2.5pc;
   margin: 2.5px 0 2.5px auto;
   padding: 3px 7px;
   width: 550px;
@@ -22,6 +23,7 @@ div.search-field-button
   cursor: pointer;
   display: inline-block;
   font: 1.25pc "Roboto", "sans-serif";
+  height: 2.5pc;
   margin: 2.5px auto 2.5px 0;
   padding: 3px 7px;
   width: 50px;
@@ -55,7 +57,10 @@ input.spotify-search
 {
   background: #F7FFE6;
   border-color: #84BD00;
+  border-left: 3px solid #84BD00;
+  border-radius: 0;
   color: #87B324;
+  width: 450px;
 }
 
 div.spotify-search-button
@@ -68,6 +73,21 @@ div.spotify-search-button
 div.spotify-search-button:hover
 {
   background: #fbfff2;
+}
+
+select.spotify-criteria-select
+{
+  background: #F7FFE6;
+  border: 3px solid #84BD00;
+  border-radius: 5px 0 0 5px;
+  border-right: 0 solid transparent;
+  color: #87B324;
+  display: inline-block;
+  font: 1pc "Roboto", "sans-serif";
+  height: 2.5pc;
+  margin: 2.5px 0 2.5px auto;
+  padding: 3px 7px;
+  width: 100px;
 }
 
 input.spotify-search:-moz-placeholder           { color: #87B324; opacity: 1; }
@@ -95,6 +115,7 @@ input.local-song-upload + label.local-song-upload-label
   cursor: pointer;
   display: inline-block;
   font: 1.25pc "Roboto", "sans-serif";
+  height: 2.5pc;
   padding: 3px 7px;
   margin: 2.5px 0 5px auto;
   text-align: left;
@@ -116,6 +137,7 @@ div.local-song-upload-button
   cursor: pointer;
   display: inline-block;
   font: 1.25pc "Roboto", "sans-serif";
+  height: 2.5pc;
   padding: 3px 7px;
   margin: 2.5px auto 5px 0;
   text-align: center;
