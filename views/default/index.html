@@ -44,12 +44,18 @@
     </div>
   </div>
   
+  <div class="search-results">
+    <iframe class="soundcloud-embed" v-for="trackUrl in soundcloudTracks"
+      scrolling="no" frameborder="no" :src=trackURL>
+    </iframe>
+  </div>
+  
   <div class="search-results" id="search-results">
     <a class="btn btn-primary btn-gradient" href="{{=URL('default', 'library')}}">Library</a>
     
     <h2>Songs</h2>
     
-    <div v-for="t in tracks">
+    <div v-for="t in spotifyTracks">
       <p>Artist: ${t.artist}</p>
       <p>Album: ${t.album}</p>
       <p>Song: ${t.title}</p>
