@@ -69,7 +69,28 @@ var app = function()
       self.extend(self.vue.spotifyTracks, data.spotifyTracks);
     });
   };
-  
+
+  self._get_track_id_from_spotify = function(){
+    $.post(_get_track_id_from_spotify,
+        {
+            dropdown: self.vue.dropdown
+        }
+    );
+
+  }
+
+  self._get_ids_from_spotify_for_track = function(){
+    $.post(_get_ids_spotify_for_track,
+        {
+            dropdown: self.vue.dropdown
+        }
+    );
+
+    }
+
+  self.dropdown_select = function(){
+    self.vue.dropdown = document.getElementById("dropdown").value;
+  }
   // *************************************************** Get more *************************************************** //
   // **************************************************************************************************************** //
   // ************************************************ Add new tracks ************************************************ //
@@ -169,7 +190,7 @@ var app = function()
       logged_in: false,
       has_more_from_soundcloud: false,
       has_more_from_spotify: false,
-      
+      dropdown: document.getElementById("dropdown").value,
       form_song: null
     },
     
@@ -179,7 +200,7 @@ var app = function()
       upload_local_file: self.upload_local_file,
       
       add_track_to_library: self.add_track_to_library,
-      
+      dropdown_select: self.dropdown_select,
       get_more: self.get_more
     }
   });

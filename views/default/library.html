@@ -14,17 +14,13 @@
   <div class="spotify_library">
         <table style="width:100%">
             <tr>
-                <th>Song Email</th>
-                <th>Current Email</th>
                 <th>Song</th>
                 <th>Artist</th>
                 <th>Album</th>
                 <th></th>
                 <th></th>
             </tr>
-            <tr v-for="l in library" class="spotify">
-                    <td>${l.user_email}</td>
-                    <td>${user_email}</td>
+            <tr v-for="l in library" v-if="l.user_email==user_email" class="spotify">
                     <td>${l.title}</td>
                     <td>${l.artist}</td>
                     <td>${l.album}</td>

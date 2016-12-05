@@ -31,7 +31,7 @@ def get_tracks_from_spotify():
   # We just generate a lot of of data.
   tracks = []
   has_more = False
-  rows = db().select(db.track.ALL, limitby=(start_idx, end_idx + 1))
+  rows = db().select(db.track.ALL, limitby=(start_idx, end_idx + 1), orderby=~db.track.added_on)
   # rows.update_record()
   for i, r in enumerate(rows):
     if i < end_idx - start_idx:
@@ -55,46 +55,69 @@ def get_tracks_from_spotify():
     else:
       has_more = True
   logged_in = auth.user_id is not None
+  if not logged_in:
+    db.track.truncate()
   return response.json(dict(
     spotifyTracks=tracks,
     logged_in=logged_in,
     has_more=has_more,
   ))
 
-def _get_track_id_from_spotify(track):
-  list=[]
+def _get_track_id_from_spotify(input):
+  list = []
   url = "https://api.spotify.com/v1/search"
-  params = dict(q="track:"+track, type='track', limit=50)
+  if (request.vars.dropdown == 'tracks'):
+    params = dict(q="track:" + input, type='track', limit=50)
+  else:
+    params = dict(q=input, type='artist', limit=1)
   results = requests.get(url=url, params=params)
   result_json = results.json()
-  
   # print result_json
   if result_json.has_key('tracks'):
     items = result_json['tracks']['items']
-    # return items
+  elif result_json.has_key('artists'):
+    items = result_json['artists']['items']
   else:
     return None
-  
-  for i in range(0,len(items)):
+
+  for i in range(0, len(items)):
     if len(items):
       list.append(items[i]['id'])
     else:
       return None
+
   return list
 
 def _get_ids_from_spotify_for_track(track):
-  id_list = _get_track_id_from_spotify(track=track)
+  id_list = _get_track_id_from_spotify(input=track)
   if id_list is None:
     response.flash = T("Track '{}' not found".format(track))
     return []
-  url = "https://api.spotify.com/v1/tracks/?ids="
-  for i in range(0, len(id_list)):
-    url += id_list[i] + ","
-  url = url[:-1]
-  country = 'US'
-  params = {}
-  params['country'] = country
-  results = requests.get(url=url)
+  if len(id_list) > 1:
+    url = "https://api.spotify.com/v1/tracks/?ids="
+    for i in range(0, len(id_list)):
+      url += id_list[i] + ","
+    url = url[:-1]
+    results = requests.get(url=url)
+  else:
+    url = "https://api.spotify.com/v1/artists/{}/top-tracks".format(id_list[0])
+    country = 'US'
+    params = {}
+    params['country'] = country
+    results = requests.get(url=url, params=params)
+    # album_url = "https://api.spotify.com/v1/artists/{}/albums".format(id_list[0])
+    # album_result = requests.get(url=album_url)
+    # album_result = album_result.json()
+    # items = album_result['items']
+    # songs = []
+    # for i in range(0,len(items)):
+    #     track_url= "https://api.spotify.com/v1/albums/{}/ tracks".format(i['id'])
+    #     track_result= requests.get(url=track_url)
+    #     track_result_json = track_result.json()
+    #     songs.append(track_result_json['items'])
+    # tracks_list = songs[0]
+    # for i in range(0,len(tracks_list)):
+
   results_for_db = _parse_spotify_tracks(results.json())
   return results_for_db
 
@@ -126,7 +149,7 @@ def add_track_from_soundcloud():
   return response.json(dict(track_id=track_id))
 
 def add_track_from_spotify():
-  del_songs()
+  # del_songs()
   tracks = _get_ids_from_spotify_for_track(request.vars.song)
   tracks_info = []
   for i in range(0,len(tracks)):

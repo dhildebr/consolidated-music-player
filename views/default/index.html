@@ -27,8 +27,15 @@
   
   <!-- Spotify bar -->
   <div class="centered">
+    <select id="dropdown" v-on:change="dropdown_select">
+        <option value="tracks">Tracks</option>
+        <option value="artist">Artist</option>
+    </select>
     <input class="search-field spotify-search" id="search-field-soundcloud" placeholder="Spotify" type="text" size="50" v-model="form_song">
-    <div class="search-field-button spotify-search-button" id="spotify-search-button" v-on:click="add_track_from_spotify">
+    <div v-if="dropdown=='tracks'" class="search-field-button spotify-search-button" id="spotify-search-button" v-on:click="add_track_from_spotify">
+      <i class="fa fa-search"></i>
+    </div>
+    <div v-if="dropdown=='artist'" class="search-field-button spotify-search-button" id="spotify-search-button" v-on:click="add_track_from_spotify">
       <i class="fa fa-search"></i>
     </div>
   </div>
@@ -49,12 +56,9 @@
       scrolling="no" frameborder="no" :src=trackURL>
     </iframe>
   </div>
-  
-  <div class="search-results" id="search-results">
+
+  <div class="search-results" id="search-results" v-if="logged_in">
     <a class="btn btn-primary btn-gradient" href="{{=URL('default', 'library')}}">Library</a>
-    
-    <h2>Songs</h2>
-    
     <div v-for="t in spotifyTracks">
       <p>Artist: ${t.artist}</p>
       <p>Album: ${t.album}</p>
@@ -63,9 +67,13 @@
       <p v-if="t.track_source == 'spotify'"><iframe v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
       <button v-on:click="add_track_to_library(t.id)">Add to library</button>
     </div>
-    
+
     <button class="btn btn-default btn-gradient" id="get-more-button" v-on:click="get_more()">Load More</button>
   </div>
+
+    <div v-else>
+        <h1>Log in to search and add songs</h1>
+    </div>
 </div>
 
 {{block page_end_js}}
