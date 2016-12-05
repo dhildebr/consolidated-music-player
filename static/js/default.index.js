@@ -51,7 +51,7 @@ var app = function()
   self.get_tracks_from_spotify = function()
   {
     $.getJSON(get_tracks_from_spotify_url(0, 10), function (data) {
-      self.vue.spotifyTracks = data.tracks;
+      self.vue.spotifyTracks = data.spotifyTracks;
       self.vue.logged_in = data.logged_in;
       self.vue.has_more_from_spotify = data.has_more;
     });
@@ -66,7 +66,7 @@ var app = function()
     var num_tracks = self.vue.spotifyTracks.length;
     $.getJSON(get_tracks_from_spotify_url(num_tracks, num_tracks + 5), function (data) {
       self.vue.has_more_from_spotify = data.has_more;
-      self.extend(self.vue.spotifyTracks, data.tracks);
+      self.extend(self.vue.spotifyTracks, data.spotifyTracks);
     });
   };
   
