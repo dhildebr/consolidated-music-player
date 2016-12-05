@@ -22,7 +22,7 @@
                 <th></th>
                 <th></th>
             </tr>
-            <tr v-for="l in library" v-if="l.user_email==user_email" class="spotify">
+            <tr v-for="l in library" v-if="l.user_email==user_email && l.track_source=='spotify'" class="spotify">
                     <td>${l.user_email}</td>
                     <td>${user_email}</td>
                     <td>${l.title}</td>
@@ -32,8 +32,11 @@
                     <td><button class="btn btn-danger"><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"> Delete</i></button></td>
             </tr>
         </table>
-    </div>
 
+        <div v-for="l in library" v-if="l.track_source=='soundcloud'">
+            <iframe width="100%" height="150" scrolling="no" frameborder="no" :src="l.url"></iframe>
+        </div>
+    </div>
 
 </div>
 

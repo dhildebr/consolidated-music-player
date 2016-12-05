@@ -149,7 +149,8 @@ def get_widgets():
         if i<(end_idx-start_idx):
             widgets.append(dict(
                 id=r.id,
-                url=r.url
+                url=r.url,
+                track_source = r.track_source
             ))
         else:
             has_more=True
@@ -160,11 +161,14 @@ def get_widgets():
     ))
 
 def add_track_from_soundcloud():
+    db.soundcloud_urls.truncate()
     if request.vars.url[:7]!='<iframe' or request.vars.url[-9:]!='</iframe>':
         response.flash=T("not an iframe")
         return "error"
+    new_url = request.vars.url[request.vars.url.find('https:'): request.vars.url.find('">')]
     track_url = db.soundcloud_urls.insert(
-        url = request.vars.url
+        url = new_url,
+        track_source = 'soundcloud'
     )
     return response.json(dict(track_url=track_url))
 
@@ -201,6 +205,23 @@ def add_track_to_library():
     library.append(t_id)
     response.flash = T(title + " added to library")
     return response.json(dict(library=library))
+
+@auth.requires_login()
+def add_widget_to_library():
+    library = []
+    widget = db(db.soundcloud_urls.id==request.vars.id).select()
+    for w in widget:
+        url = w.url
+        track_source = w.track_source
+        user_email = w.user_email
+    w_id = db.library.insert(
+        url = url,
+        track_source=track_source,
+        user_email = user_email
+    )
+    library.append(w_id)
+    return response.json(dict(library=library))
+
 @auth.requires_login()
 def get_library():
     start_idx = int(request.vars.start_idx) if request.vars.start_idx is not None else 0
@@ -221,7 +242,8 @@ def get_library():
                 track_source = r.track_source,
                 track_uri = r.track_uri,
                 user_email=r.user_email,
-                added_on = r.added_on
+                added_on = r.added_on,
+                url = r.url
             )
 
             if r.track_source == 'spotify':

@@ -5,7 +5,6 @@ var app = function() {
 
     Vue.config.silent = false;  //show all warnings
 
-
     self.extend = function (a, b) {
         for (var i = 0; i < b.length; i++) {
             a.push(b[i]);
@@ -96,11 +95,12 @@ var app = function() {
                 url: self.vue.form_widget
             },
             function(){
-                console.log(self.vue.widgets);
+                // console.log(self.vue.widgets);
                 // for (var i=0; i<self.vue.widgets.length; i++){
-                //     $("#sc").append(self.vue.widgets[i].url);
+                //     $("#soundcloud_div").append(self.vue.widgets[i].url);
                 // }
             });
+        location.reload();
     }
 
     self.add_track_to_library = function (id) {
@@ -112,6 +112,13 @@ var app = function() {
               console.log("Added");
           }
       )
+    };
+
+    self.add_widget_to_library = function(id){
+        $.post(add_widget_to_library_url,
+            {
+                id:id
+            })
     };
 
     self.dropdown_select = function(){
@@ -138,9 +145,11 @@ var app = function() {
             add_track_from_soundcloud: self.add_track_from_soundcloud,
             get_more: self.get_more,
             add_track_to_library: self.add_track_to_library,
-            dropdown_select: self.dropdown_select
+            dropdown_select: self.dropdown_select,
+            add_widget_to_library: self.add_widget_to_library
         }
     });
+
     self.get_tracks();
     self.get_widgets();
     $("#vue-div").show();
