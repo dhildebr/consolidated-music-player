@@ -3,6 +3,7 @@
 {{block head}}
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <link rel="stylesheet" href="{{=URL('static', 'css/index.css')}}">
+<link rel="stylesheet" href="{{=URL('static', 'css/buttons.css')}}">
 <script>
     var tracks_url = "{{=URL('api', 'get_tracks')}}";
     var widget_url = "{{=URL('api', 'get_widgets')}}";
@@ -17,12 +18,13 @@
 {{end}}
 
 <div class="main-content" id="vue-div">
+    <h2 id="search_title">Search</h2>
     <div class="search">
         <div id="soundcloud_div" class="centered">
-            <input class="search-field soundcloud-search" id="search-field-soundcloud" placeholder="SoundCloud" type="text" size="50" v-model="form_widget">
-            <button class="btn btn-primary" v-bind:class="{'disabled': !logged_in}" v-on:click="add_track_from_soundcloud">Search</button>
+            <input class="search-field soundcloud-search" id="soundcloud_input" placeholder="SoundCloud" type="text" size="50" v-model="form_widget">
+            <button class="btn btn-primary btn-gradient" v-bind:class="{'disabled': !logged_in}" v-on:click="add_track_from_soundcloud">Search</button>
         </div>
-        <div v-for="w in widgets" v-if="w.user_email==user_email">
+        <div v-for="w in widgets" v-if="w.user_email==user_email && logged_in">
             <iframe width="100%" height="150" scrolling="no" frameborder="no" :src="w.url"></iframe>
             <button v-on:click="add_widget_to_library(w.id)">Add to Library</button>
         </div>
@@ -32,26 +34,27 @@
                 <option value="tracks">Tracks</option>
                 <option value="artist">Artist</option>
             </select>
-            <input class="search-field spotify-search" id="search-field-soundcloud" placeholder="Spotify" type="text" size="50" v-model="form_input">
-            <button v-if="dropdown=='tracks'" class="btn btn-primary" v-on:click="add_track_from_spotify" id="add_track_from_spotify_submit" v-bind:class="{'disabled': !logged_in}">Search</button>
-            <button v-if="dropdown=='artist'" class="btn btn-primary" v-on:click="add_track_from_spotify" id="add_track_from_spotify_submit" v-bind:class="{'disabled': !logged_in}">Search</button>
+            <input class="search-field spotify-search" id="spotify_input" placeholder="Spotify" type="text" size="50" v-model="form_input">
+            <button v-if="dropdown=='tracks'" class="btn btn-primary btn-gradient" v-on:click="add_track_from_spotify" id="add_track_from_spotify_submit" v-bind:class="{'disabled': !logged_in}">Search</button>
+            <button v-if="dropdown=='artist'" class="btn btn-primary btn-gradient" v-on:click="add_track_from_spotify" id="add_track_from_spotify_submit" v-bind:class="{'disabled': !logged_in}">Search</button>
         </div>
     </div>
     <div v-if="logged_in">
         <a href="{{=URL('default', 'library')}}" class="btn btn-primary" v-if="logged_in">Library</a>
         <div v-for="t in tracks" class="spotify_search" v-if="t.user_email==user_email">
-            <p id="artist">${t.artist}</p>
-            <p>${t.user_email}</p>
-            <p>Song: ${t.title}</p>
-            <p>Album: ${t.album}</p>
-            <p v-if="t.track_source=='spotify'"><iframe id="iframe" v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
-            <button v-on:click="add_track_to_library(t.id)" v-if="logged_in">Add to library</button>
+            <div id="song_text">
+                <p id="title">${t.title}</p>
+                <p>Artist: ${t.artist}</p>
+                <p>Album: ${t.album}</p>
+            </div>
+            <p v-if="t.track_source=='spotify'" id="spotify_widget"><iframe id="iframe" v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
+            <button v-on:click="add_track_to_library(t.id)" v-if="logged_in" class="btn btn-info btn-gradient" id="library"><i class="fa fa-plus" aria-hidden="true"></i>Add to library</button>
 
         </div>
-        <button id="get_more" v-on:click="get_more()">Load More</button>
+        <button id="get_more" v-on:click="get_more()" v-if="has_more">Load More</button>
     </div>
-    <div v-else>
-        <h1>Logged in to search and add songs</h1>
+    <div v-else id="login_text">
+        <h1>Log in to search and add songs to your library</h1>
     </div>
 </div>
 

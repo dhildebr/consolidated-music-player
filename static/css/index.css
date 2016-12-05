@@ -1,0 +1,66 @@
+body{
+    background-color: darkslategray;
+}
+
+#search_title{
+    background-color: #FFF1E6;
+    color: darkslategrey;
+    font-weight: bold;
+    margin-left: 20px;
+    border: 5px solid lightgreen;
+}
+
+#soundcloud_input{
+    width: 80%;
+}
+
+#spotify_input{
+    width: 73.5%;
+}
+
+div.search{
+    background: #eeeeee;
+    padding: 10px 10px;
+    border: 2px solid black;
+    margin: 10px;
+}
+
+.spotify_search{
+    background-color: #FFF1E6;
+    border: 4px solid lightgreen;
+    height: 225px;
+    margin: 10px;
+    position: relative;
+}
+
+#title{
+    font-size: 2em;
+    font-style: italic;
+}
+
+#spotify_widget{
+    position: absolute;
+    bottom: 5%;
+    left: 15%;
+}
+
+#song_text{
+    text-align: center;
+    font-weight: bold;
+}
+
+#library{
+    position: absolute;
+    bottom: 20%;
+    right: 30%;
+
+}
+
+#login_text{
+    background-color: #FFF1E6;
+    margin: 150px;
+    text-align: center;
+    border: 5px solid #afd9ee;
+    color: darkslategrey;
+    font-weight: bold;
+}

@@ -23,6 +23,7 @@ input.spotify-search
 div.search{
   background: #eeeeee;
   padding: 30px 10px;
+  border: 2px solid black;
 }
 
 div.centered
@@ -46,16 +47,8 @@ div.main-content
   font-size: 2em;
 }
 
-.spotify_search{
-  border: 4px solid green;
-  margin: 20px 10px;
-}
 
-#artist{
-  font-size: 2em;
-  font-weight: bold;
-  font-style: italic;
-}
+
 
 #iframe{
   border: 3px solid #84BD00;
