@@ -2,7 +2,8 @@
 
 {{block head}}
 <script>
-  var tracks_url = "{{=URL('api', 'get_tracks')}}";
+  var get_tracks_from_soundcloud_url = "{{=URL('api', 'get_tracks_from_soundcloud')}}";
+  var get_tracks_from_spotify_url = "{{=URL('api', 'get_tracks_from_spotify')}}";
   
   var add_track_from_soundcloud_url = "{{=URL('api', 'add_track_from_soundcloud', user_signature=True)}}";
   var add_track_from_spotify_url    = "{{=URL('api', 'add_track_from_spotify', user_signature=True)}}";
@@ -19,7 +20,7 @@
   <!-- Soundcloud bar -->
   <div class="centered">
     <input class="search-field soundcloud-search" id="search-field-soundcloud" type="text" placeholder="Soundcloud" />
-    <div class="search-field-button soundcloud-search-button" id="soundcloud-search-button">
+    <div class="search-field-button soundcloud-search-button" id="soundcloud-search-button" v-on:click="add_track_from_soundcloud();">
       <i class="fa fa-plus"></i>
     </div>
   </div>

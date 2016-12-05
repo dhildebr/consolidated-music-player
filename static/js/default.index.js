@@ -10,30 +10,66 @@ var app = function()
       }
   };
   
-  function get_tracks_url(start_idx, end_idx)
+  function get_tracks_from_soundcloud_url(start_idx, end_idx)
   {
     var pp = {
       start_idx: start_idx,
       end_idx: end_idx
     };
-    return tracks_url + "?" + $.param(pp);
+    
+    return get_tracks_from_soundcloud_url + "?" + $.param(pp);
+  }
+  
+  function get_tracks_from_spotify_url(start_idx, end_idx)
+  {
+    var pp = {
+      start_idx: start_idx,
+      end_idx: end_idx
+    };
+    
+    return get_tracks_from_spotify_url + "?" + $.param(pp);
   }
   
   self.get_tracks = function()
   {
-    $.getJSON(get_tracks_url(0, 10), function (data) {
+    $.getJSON(get_tracks_from_spotify_url(0, 10), function (data) {
       self.vue.tracks = data.tracks;
       self.vue.has_more = data.has_more;
       self.vue.logged_in = data.logged_in;
     })
   };
   
+  // ************************************************** Get tracks ************************************************** //
+  // **************************************************************************************************************** //
+  // *************************************************** Get more *************************************************** //
+  
   self.get_more = function()
   {
     var num_tracks = self.vue.tracks.length;
-    $.getJSON(get_tracks_url(num_tracks, num_tracks + 5), function (data) {
+    $.getJSON(get_tracks_from_spotify_url(num_tracks, num_tracks + 5), function (data) {
       self.vue.has_more = data.has_more;
       self.extend(self.vue.tracks, data.tracks);
+    });
+  };
+  
+  // *************************************************** Get more *************************************************** //
+  // **************************************************************************************************************** //
+  // ************************************************ Add new tracks ************************************************ //
+  
+  self.add_track_from_soundcloud = function()
+  {
+    var scSrc = $("#search-field-soundcloud").val();
+    if(scSrc == null || scSrc == "")
+      return;
+    
+    $.post(add_track_from_soundcloud_url,
+    {
+      url: scSrc
+    },
+    function(data)
+    {
+      console.log("Inserted Soundcloud track with ID: " + data.track_id);
+      self.vue.soundcloudIDs.push(data.track_id);
     });
   };
   
@@ -54,18 +90,6 @@ var app = function()
     );
     
     location.reload();
-  };
-  
-  self.add_track_to_library = function(id)
-  {
-    $.post(add_track_to_library_url,
-      {
-        id: id
-      },
-      function() {
-        console.log("Added");
-      }
-    )
   };
   
   self.upload_local_file = function()
@@ -102,7 +126,19 @@ var app = function()
           + rejectedFileNames.join("\n")
       );
     }
-  }
+  };
+  
+  self.add_track_to_library = function(id)
+  {
+    $.post(add_track_to_library_url,
+      {
+        id: id
+      },
+      function() {
+        console.log("Added");
+      }
+    )
+  };
   
   self.vue = new Vue({
     el: "#vue-div",
@@ -110,17 +146,22 @@ var app = function()
     unsafeDelimiters: ['!{', '}'],
     
     data: {
+      soundcloudIDs: [],
       tracks: [],
+      
       logged_in: false,
       has_more: false,
       form_song: null,
     },
     
     methods: {
+      add_track_from_soundcloud: self.add_track_from_soundcloud,
       add_track_from_spotify: self.add_track_from_spotify,
-      get_more: self.get_more,
+      upload_local_file: self.upload_local_file,
+      
       add_track_to_library: self.add_track_to_library,
-      upload_local_file: self.upload_local_file
+      
+      get_more: self.get_more
     }
   });
   

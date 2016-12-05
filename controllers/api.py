@@ -1,7 +1,7 @@
 import requests
 
 # Searching for tracks
-def get_tracks():
+def get_tracks_from_spotify():
   start_idx = int(request.vars.start_idx) if request.vars.start_idx is not None else 0
   end_idx = int(request.vars.end_idx) if request.vars.end_idx is not None else 0
   # We just generate a lot of of data.
@@ -94,7 +94,10 @@ def _parse_spotify_tracks(results):
 
 
 def add_track_from_soundcloud():
-  return response.json(dict())
+  track_id = db.soundcloud_urls.insert(
+    url = request.vars.url
+  )
+  return response.json(dict(track_id=track_id))
 
 def add_track_from_spotify():
   del_songs()
