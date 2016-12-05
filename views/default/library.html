@@ -10,17 +10,17 @@
 {{end}}
 
 <div id="vue-div">
-    <a href="{{=URL('default', 'index')}}" class="btn btn-primary">Index</a>
+    <a href="{{=URL('default', 'index')}}" class="btn btn-primary btn-gradient">Index</a>
     <div class="spotify_library">
-        <table style="width:100%">
-            <tr>
+        <table style="width:100%;">
+            <tr style="background: #FFF1E6;">
                 <th>Song</th>
                 <th>Artist</th>
                 <th>Album</th>
                 <th></th>
                 <th></th>
             </tr>
-            <tr v-for="l in library" v-if="l.user_email==user_email && l.track_source=='spotify'" class="spotify">
+            <tr v-for="l in library" v-if="l.user_email==user_email && l.track_source=='spotify'" class="spotify" style="background: #FFF1E6;">
                 <td>${l.title}</td>
                 <td>${l.artist}</td>
                 <td>${l.album}</td>
@@ -29,7 +29,7 @@
             </tr>
         </table>
     </div>
-    <div v-for="l in library" v-if="l.user_email==user_email && l.track_source=='soundcloud'">
+    <div v-for="l in library" v-if="l.user_email==user_email && l.track_source=='soundcloud'" style="background: #FFF1E6; border: 3px solid #FF7700;">
         <iframe width="300" height="80" scrolling="no" frameborder="no" :src="l.url"></iframe>
         <button class="btn btn-danger"><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"> Delete</i></button>
     </div>
