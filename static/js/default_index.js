@@ -118,6 +118,9 @@ var app = function() {
         $.post(add_widget_to_library_url,
             {
                 id:id
+            },
+            function(){
+                console.log("Added")
             })
     };
 

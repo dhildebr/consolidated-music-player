@@ -150,10 +150,13 @@ def get_widgets():
             widgets.append(dict(
                 id=r.id,
                 url=r.url,
-                track_source = r.track_source
+                track_source = r.track_source,
+                user_email = r.user_email
             ))
         else:
             has_more=True
+    if not logged_in:
+        db.soundcloud_urls.truncate()
     return response.json(dict(
         widgets=widgets,
         logged_in=logged_in,
@@ -220,6 +223,7 @@ def add_widget_to_library():
         user_email = user_email
     )
     library.append(w_id)
+    response.flash= T("Widget added")
     return response.json(dict(library=library))
 
 @auth.requires_login()

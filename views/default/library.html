@@ -14,8 +14,6 @@
     <div class="spotify_library">
         <table style="width:100%">
             <tr>
-                <th>Song Email</th>
-                <th>Current Email</th>
                 <th>Song</th>
                 <th>Artist</th>
                 <th>Album</th>
@@ -23,19 +21,17 @@
                 <th></th>
             </tr>
             <tr v-for="l in library" v-if="l.user_email==user_email && l.track_source=='spotify'" class="spotify">
-                    <td>${l.user_email}</td>
-                    <td>${user_email}</td>
-                    <td>${l.title}</td>
-                    <td>${l.artist}</td>
-                    <td>${l.album}</td>
-                    <td><iframe v-if="l.track_source=='spotify'" v-bind:src="l.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></td>
-                    <td><button class="btn btn-danger"><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"> Delete</i></button></td>
+                <td>${l.title}</td>
+                <td>${l.artist}</td>
+                <td>${l.album}</td>
+                <td><iframe v-if="l.track_source=='spotify'" v-bind:src="l.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></td>
+                <td><button class="btn btn-danger"><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"> Delete</i></button></td>
             </tr>
         </table>
-
-        <div v-for="l in library" v-if="l.track_source=='soundcloud'">
-            <iframe width="100%" height="150" scrolling="no" frameborder="no" :src="l.url"></iframe>
-        </div>
+    </div>
+    <div v-for="l in library" v-if="l.user_email==user_email && l.track_source=='soundcloud'">
+        <iframe width="300" height="80" scrolling="no" frameborder="no" :src="l.url"></iframe>
+        <button class="btn btn-danger"><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"> Delete</i></button>
     </div>
 
 </div>
