@@ -7,6 +7,8 @@
 # There is an implicit 'id integer autoincrement' field
 # Consult manual for more options, validators, etc.
 
+import datetime
+
 def get_user_email():
     return auth.user.email if auth.user else None
 
@@ -20,7 +22,9 @@ db.define_table('track',
                 Field('title'),
                 Field('duration', 'float'),
                 Field('track_source',default='manual'),
-                Field('track_uri')
+                Field('track_uri'),
+                Field('user_email', default=auth.user.email if auth.user_id else None),
+                Field('added_on', 'datetime', default=datetime.datetime.utcnow())
                 )
 
 db.define_table('local_tracks',
@@ -34,7 +38,9 @@ db.define_table('library',
                 Field('title'),
                 Field('duration', 'float'),
                 Field('track_source', default='manual'),
-                Field('track_uri')
+                Field('track_uri'),
+                Field('user_email', default=auth.user.email if auth.user_id else None),
+                Field('added_on', 'datetime', default=datetime.datetime.utcnow())
                 )
 
 # after defining tables, uncomment below to enable auditing

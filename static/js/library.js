@@ -20,10 +20,11 @@ var app = function() {
     }
 
     self.get_library = function () {
-        $.getJSON(get_tracks_url(0, 5), function (data) {
+        $.getJSON(get_tracks_url(0, 100), function (data) {
             self.vue.library = data.library;
             self.vue.has_more = data.has_more;
             self.vue.logged_in = data.logged_in;
+            self.vue.user_email = current_user;
         })
     };
 
@@ -95,6 +96,7 @@ var app = function() {
             library: [],
             logged_in: false,
             has_more: false,
+            user_email: null
         },
         methods: {
             delete_track: self.delete_track

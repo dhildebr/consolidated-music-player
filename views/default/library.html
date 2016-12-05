@@ -4,18 +4,35 @@
 <script>
   var library_url = "{{=URL('api', 'get_library')}}";
   var del_track_url = "{{=URL('api', 'del_from_library', user_signature=True)}}";
+  var current_user = "{{=auth.user.email if auth.user_id else None}}";
+
 </script>
 {{end}}
 
 <div id="vue-div">
   <a href="{{=URL('default', 'index')}}" class="btn btn-primary">Index</a>
-  <div v-for="l in library">
-    <p>Artist: ${l.artist}</p>
-    <p>Album: ${l.album}</p>
-    <p>Song: ${l.title}</p>
-    <p v-if="l.track_source=='spotify'"><iframe v-bind:src="l.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
-    <button><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"></i></button>
-  </div>
+  <div class="spotify_library">
+        <table style="width:100%">
+            <tr>
+                <th>Song Email</th>
+                <th>Current Email</th>
+                <th>Song</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr v-for="l in library" class="spotify">
+                    <td>${l.user_email}</td>
+                    <td>${user_email}</td>
+                    <td>${l.title}</td>
+                    <td>${l.artist}</td>
+                    <td>${l.album}</td>
+                    <td><iframe v-if="l.track_source=='spotify'" v-bind:src="l.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></td>
+                    <td><button class="btn btn-danger"><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"> Delete</i></button></td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <script src="{{=URL('static', 'js/library.js')}}"></script>
