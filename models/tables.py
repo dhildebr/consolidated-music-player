@@ -6,6 +6,7 @@
 #       'date','time','datetime','blob','upload', 'reference TABLENAME'
 # There is an implicit 'id integer autoincrement' field
 # Consult manual for more options, validators, etc.
+import datetime
 
 def get_user_email():
     return auth.user.email if auth.user else None
@@ -17,7 +18,8 @@ db.define_table('track',
                 Field('duration', 'float'),
                 Field('track_source',default='manual'),
                 Field('track_uri'),
-                Field('user_email', default=auth.user.email if auth.user_id else None)
+                Field('user_email', default=auth.user.email if auth.user_id else None),
+                Field('added_on', 'datetime', default=datetime.datetime.utcnow())
                 )
 
 db.define_table('library',
@@ -27,7 +29,8 @@ db.define_table('library',
                 Field('duration', 'float'),
                 Field('track_source', default='manual'),
                 Field('track_uri'),
-                Field('user_email', default=auth.user.email if auth.user_id else None)
+                Field('user_email', default=auth.user.email if auth.user_id else None),
+                Field('added_on', 'datetime', default=datetime.datetime.utcnow())
                 )
 # after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)

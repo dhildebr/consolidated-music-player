@@ -7,7 +7,7 @@ def get_tracks():
     # We just generate a lot of of data.
     tracks = []
     has_more = False
-    rows = db().select(db.track.ALL, limitby=(start_idx, end_idx + 1))
+    rows = db().select(db.track.ALL, limitby=(start_idx, end_idx + 1), orderby=~db.track.added_on)
     # rows.update_record()
     for i, r in enumerate(rows):
         if i < end_idx - start_idx:
@@ -19,7 +19,8 @@ def get_tracks():
                 duration=r.duration,
                 track_source = r.track_source,
                 track_uri = r.track_uri,
-                user_email = r.user_email
+                user_email = r.user_email,
+                added_on = r.added_on
             )
 
             if r.track_source == 'spotify':
@@ -30,6 +31,8 @@ def get_tracks():
         else:
             has_more = True
     logged_in = auth.user_id is not None
+    if not logged_in:
+        db.track.truncate()
     return response.json(dict(
         tracks=tracks,
         logged_in=logged_in,
@@ -118,7 +121,7 @@ def _parse_spotify_tracks(results):
 
 
 def add_track_from_spotify():
-    del_songs()
+    # del_songs()
     # if (request.vars.dropdown=='tracks'):
     tracks = _get_ids_from_spotify_for_track(request.vars.input)
     tracks_info = []
@@ -142,7 +145,7 @@ def del_songs():
 # --------------------------------
 
 # Add selected track to database
-
+@auth.requires_login()
 def add_track_to_library():
     library = []
     track = db(db.track.id==request.vars.id).select()
@@ -153,6 +156,8 @@ def add_track_to_library():
         duration = t.duration
         track_source = t.track_source
         track_uri = t.track_uri
+        user_email = t.user_email
+        added_on = t.added_on
     t_id = db.library.insert(
         artist = artist,
         album = album,
@@ -160,12 +165,13 @@ def add_track_to_library():
         duration = duration,
         track_source = track_source,
         track_uri = track_uri,
-        user_email = auth.user.email
+        user_email = user_email,
+        added_on = added_on
     )
     library.append(t_id)
     response.flash = T(title + " added to library")
     return response.json(dict(library=library))
-
+@auth.requires_login()
 def get_library():
     start_idx = int(request.vars.start_idx) if request.vars.start_idx is not None else 0
     end_idx = int(request.vars.end_idx) if request.vars.end_idx is not None else 0
@@ -183,7 +189,9 @@ def get_library():
                 title=r.title,
                 duration=r.duration,
                 track_source = r.track_source,
-                track_uri = r.track_uri
+                track_uri = r.track_uri,
+                user_email=r.user_email,
+                added_on = r.added_on
             )
 
             if r.track_source == 'spotify':
@@ -199,7 +207,7 @@ def get_library():
         logged_in=logged_in,
         has_more=has_more,
     ))
-
+@auth.requires_login()
 def del_from_library():
     db(db.library.id == request.vars.track_id).delete()
     return "ok"

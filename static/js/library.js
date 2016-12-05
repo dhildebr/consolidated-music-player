@@ -24,6 +24,7 @@ var app = function() {
             self.vue.library = data.library;
             self.vue.has_more = data.has_more;
             self.vue.logged_in = data.logged_in;
+            self.vue.user_email = current_user;
         })
     };
 
@@ -95,6 +96,7 @@ var app = function() {
             library: [],
             logged_in: false,
             has_more: false,
+            user_email: null
         },
         methods: {
             delete_track: self.delete_track

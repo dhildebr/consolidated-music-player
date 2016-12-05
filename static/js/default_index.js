@@ -25,12 +25,13 @@ var app = function() {
             self.vue.tracks = data.tracks;
             self.vue.has_more = data.has_more;
             self.vue.logged_in = data.logged_in;
+            self.vue.user_email = current_user;
         })
     };
 
     self.get_more = function () {
         var num_tracks = self.vue.tracks.length;
-        $.getJSON(get_tracks_url(num_tracks, num_tracks + 5), function (data) {
+        $.getJSON(get_tracks_url(num_tracks, num_tracks + 10), function (data) {
             self.vue.has_more = data.has_more;
             self.extend(self.vue.tracks, data.tracks);
         });
@@ -98,6 +99,7 @@ var app = function() {
             has_more: false,
             form_input: null,
             dropdown: document.getElementById("dropdown").value,
+            user_email: null
         },
         methods: {
             add_track_from_spotify: self.add_track_from_spotify,

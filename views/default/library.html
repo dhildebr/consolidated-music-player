@@ -5,6 +5,7 @@
 <script>
     var library_url = "{{=URL('api', 'get_library')}}";
     var del_track_url = "{{=URL('api', 'del_from_library', user_signature=True)}}";
+    var current_user = "{{=auth.user.email if auth.user_id else None}}";
 </script>
 {{end}}
 
@@ -13,13 +14,17 @@
     <div class="spotify_library">
         <table style="width:100%">
             <tr>
+                <th>Song Email</th>
+                <th>Current Email</th>
                 <th>Song</th>
                 <th>Artist</th>
                 <th>Album</th>
                 <th></th>
                 <th></th>
             </tr>
-            <tr v-if="l.track_source=='spotify'"  v-for="l in library" class="spotify">
+            <tr v-for="l in library" v-if="l.user_email==user_email" class="spotify">
+                    <td>${l.user_email}</td>
+                    <td>${user_email}</td>
                     <td>${l.title}</td>
                     <td>${l.artist}</td>
                     <td>${l.album}</td>

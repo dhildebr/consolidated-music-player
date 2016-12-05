@@ -17,12 +17,7 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
-    library = None
-    if auth.user_id is not None:
-        # The user is logged in.
-        # Gets the list of all checklists for the user.
-        library = db(db.library.user_email == auth.user.email).select()
-    return dict(libary=library)
+    return dict(message=T('Welcome to web2py!'))
 
 
 def user():
