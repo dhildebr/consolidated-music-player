@@ -62,7 +62,7 @@ def get_tracks_from_spotify():
 def _get_track_id_from_spotify(track):
   list=[]
   url = "https://api.spotify.com/v1/search"
-  params = dict(q="track:"+track, type='track')
+  params = dict(q="track:"+track, type='track', limit=50)
   results = requests.get(url=url, params=params)
   result_json = results.json()
   
