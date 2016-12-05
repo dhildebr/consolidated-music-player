@@ -96,7 +96,7 @@ input.local-song-upload + label.local-song-upload-label
   display: inline-block;
   font: 1.25pc "Roboto", "sans-serif";
   padding: 3px 7px;
-  margin: 0 0 5px auto;
+  margin: 2.5px 0 5px auto;
   text-align: left;
   width: 250px;
 }
