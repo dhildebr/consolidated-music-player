@@ -61,7 +61,7 @@
       <p>Song: ${t.title}</p>
       <p>Id: ${t.id}</p>
       <p v-if="t.track_source == 'spotify'"><iframe v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
-      <button v-on:click="add_track_to_library(t.id)">Add to library</button>
+      <button v-f="has_more_from_spotify" v-on:click="add_track_to_library(t.id)">Add to library</button>
     </div>
     
     <button class="btn btn-default btn-gradient" id="get-more-button" v-on:click="get_more()">Load More</button>
