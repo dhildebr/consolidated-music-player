@@ -24,10 +24,6 @@
             <input class="search-field soundcloud-search" id="soundcloud_input" placeholder="SoundCloud" type="text" size="50" v-model="form_widget">
             <button class="btn btn-primary btn-gradient" v-bind:class="{'disabled': !logged_in}" v-on:click="add_track_from_soundcloud">Search</button>
         </div>
-        <div v-for="w in widgets" v-if="w.user_email==user_email && logged_in">
-            <iframe width="100%" height="150" scrolling="no" frameborder="no" :src="w.url"></iframe>
-            <button v-on:click="add_widget_to_library(w.id)">Add to Library</button>
-        </div>
 
         <div id="spotify_div" class="centered">
             <select id="dropdown" v-on:change="dropdown_select">
@@ -40,14 +36,18 @@
         </div>
     </div>
     <div v-if="logged_in">
-        <a href="{{=URL('default', 'library')}}" class="btn btn-primary" v-if="logged_in">Library</a>
+        <a href="{{=URL('default', 'library')}}" class="btn btn-primary" style="margin: 10px;" v-if="logged_in">Library</a>
+        <div v-for="w in widgets" v-if="w.user_email==user_email && logged_in" class="soundcloud_search" style="border: 6px solid orangered; width:60%; background-color: #FFF1E6; right: 10%;">
+            <button v-on:click="add_widget_to_library(w.id)" style="bottom:90%%;" class="btn btn-info btn-gradient">Add to Library</button>
+            <iframe width="60%" height="150" scrolling="no" frameborder="no" :src="w.url" style="left:60%;"></iframe>
+        </div>
         <div v-for="t in tracks" class="spotify_search" v-if="t.user_email==user_email">
             <div id="song_text">
                 <p id="title">${t.title}</p>
                 <p>Artist: ${t.artist}</p>
                 <p>Album: ${t.album}</p>
             </div>
-            <p v-if="t.track_source=='spotify'" id="spotify_widget"><iframe id="iframe" v-bind:src="t.audio_file" width="300" height="80" frameborder="0" allowtransparency="true"></iframe></p>
+            <p v-if="t.track_source=='spotify'" id="spotify_widget"><iframe id="iframe" v-bind:src="t.audio_file" width="250" height="80" frameborder="0" allowtransparency="true"></iframe></p>
             <button v-on:click="add_track_to_library(t.id)" v-if="logged_in" class="btn btn-info btn-gradient" id="library"><i class="fa fa-plus" aria-hidden="true"></i>Add to library</button>
 
         </div>

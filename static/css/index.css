@@ -26,6 +26,7 @@ div.search{
 }
 
 .spotify_search{
+    width: 70%;
     background-color: #FFF1E6;
     border: 4px solid lightgreen;
     height: 225px;
@@ -41,7 +42,7 @@ div.search{
 #spotify_widget{
     position: absolute;
     bottom: 5%;
-    left: 15%;
+    left: 5%;
 }
 
 #song_text{
@@ -52,7 +53,7 @@ div.search{
 #library{
     position: absolute;
     bottom: 20%;
-    right: 30%;
+    right: 20%;
 
 }
 
