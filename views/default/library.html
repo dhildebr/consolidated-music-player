@@ -31,7 +31,7 @@
     </div>
     <div v-for="l in library" v-if="l.user_email==user_email && l.track_source=='soundcloud'" style="background: #FFF1E6; border: 3px solid #FF7700;">
         <iframe width="300" height="80" scrolling="no" frameborder="no" :src="l.url"></iframe>
-        <button class="btn btn-danger" style="float: right; margin: 10px;"><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"> Delete</i></button>
+        <button class="btn btn-danger" style="float: right; margin: auto 10px;"><i class="fa fa-trash-o" v-on:click="delete_track(l.id)"> Delete</i></button>
     </div>
 
 </div>
