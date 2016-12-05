@@ -11,6 +11,9 @@ import datetime
 def get_user_email():
     return auth.user.email if auth.user else None
 
+db.define_table('soundcloud_urls',
+                Field('url'))
+
 db.define_table('track',
                 Field('artist'),
                 Field('album'),

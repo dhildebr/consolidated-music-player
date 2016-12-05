@@ -5,8 +5,10 @@
 <link rel="stylesheet" href="{{=URL('static', 'css/index.css')}}">
 <script>
     var tracks_url = "{{=URL('api', 'get_tracks')}}";
+    var widget_url = "{{=URL('api', 'get_widgets')}}";
     var del_track_url = "{{=URL('api', 'del_track', user_signature=True)}}";
     var add_track_from_spotify_url = "{{=URL('api', 'add_track_from_spotify', user_signature=True)}}";
+    var add_track_from_soundcloud_url = "{{=URL('api', 'add_track_from_soundcloud', user_signature=True)}}";
     var add_track_to_library_url = "{{=URL('api', 'add_track_to_library', user_signature=True)}}";
     var current_user = "{{=auth.user.email if auth.user_id else None}}";
 </script>
@@ -16,8 +18,11 @@
 <div class="main-content" id="vue-div">
     <div class="search">
         <div id="soundcloud_div" class="centered">
-            <input class="search-field soundcloud-search" id="search-field-soundcloud" placeholder="SoundCloud" type="text" size="50">
-            <button class="btn btn-primary" v-bind:class="{'disabled': !logged_in}">Search</button>
+            <input class="search-field soundcloud-search" id="search-field-soundcloud" placeholder="SoundCloud" type="text" size="50" v-model="form_widget">
+            <button class="btn btn-primary" v-bind:class="{'disabled': !logged_in}" v-on:click="add_track_from_soundcloud">Search</button>
+        </div>
+        <div id="sc">
+
         </div>
 
         <div id="spotify_div" class="centered">

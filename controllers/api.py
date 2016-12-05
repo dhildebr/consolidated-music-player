@@ -69,13 +69,13 @@ def _get_ids_from_spotify_for_track(track):
     if id_list is None:
         response.flash = T("Track '{}' not found".format(track))
         return []
-    if len(id_list)>1:
+    if request.vars.dropdown=='tracks':
         url = "https://api.spotify.com/v1/tracks/?ids="
         for i in range(0, len(id_list)):
             url += id_list[i] + ","
         url = url[:-1]
         results = requests.get(url=url)
-    else:
+    elif request.vars.dropdown=='artist':
         url = "https://api.spotify.com/v1/artists/{}/top-tracks".format(id_list[0])
         country = 'US'
         params = {}
@@ -137,6 +137,36 @@ def add_track_from_spotify():
         )
         tracks_info.append(t_id)
     return response.json(dict(track=tracks_info))
+
+def get_widgets():
+    start_idx = int(request.vars.start_idx) if (request.vars.start_idx is not None) else 0
+    end_idx = int(request.vars.end_idx) if (request.vars.end_idx is not None)   else 0
+    widgets=[]
+    logged_in = auth.user_id is not None
+    has_more=False
+    rows = db().select(db.soundcloud_urls.ALL, limitby=(start_idx, end_idx+1))
+    for i, r in enumerate(rows):
+        if i<(end_idx-start_idx):
+            widgets.append(dict(
+                id=r.id,
+                url=r.url
+            ))
+        else:
+            has_more=True
+    return response.json(dict(
+        widgets=widgets,
+        logged_in=logged_in,
+        has_more=has_more
+    ))
+
+def add_track_from_soundcloud():
+    if request.vars.url[:7]!='<iframe' or request.vars.url[-9:]!='</iframe>':
+        response.flash=T("not an iframe")
+        return "error"
+    track_url = db.soundcloud_urls.insert(
+        url = request.vars.url
+    )
+    return response.json(dict(track_url=track_url))
 
 def del_songs():
     db.track.truncate()
